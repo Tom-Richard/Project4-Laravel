@@ -44,7 +44,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
+        $roles = Role::all()->except(1);
         return view('employees.create', ['roles' => $roles]);
     }
 
