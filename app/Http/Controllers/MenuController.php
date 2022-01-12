@@ -22,6 +22,7 @@ class MenuController extends Controller
         //Dit is niet de EDIT van de menu tabel! Met deze functie kun je ingredienten aan pizza's toevoegen of van pizza's afhalen.
         $ingredienten = Ingredient::all();
 
+        
         return view('menus.edit',compact('ingredienten'));
 
         //wordt vervolgt

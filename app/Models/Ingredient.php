@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ingredient extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     public function ingredients()
     {
         // tweede parameter geeft de tussentabel (naam)
