@@ -5,6 +5,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MenuController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +31,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/resetpassword/{id}', [AdminController::class, 'resetpassword'])->name('admin.resetpassword');
     Route::put('/admin/updatepassword/{id}', [AdminController::class, 'updatepassword'])->name('admin.updatepassword');
+    Route::resource('menu',MenuController::class)->middleware('auth'); //Log eerst in voordat je het menu bekijkt.
     Route::resource('role', RoleController::class);
     Route::resource('user', UserController::class);
     Route::resource('employee', EmployeeController::class);

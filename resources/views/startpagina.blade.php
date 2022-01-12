@@ -71,7 +71,7 @@
 
      <div class="buttons">
         <div class="container">
-            <a href="menu.html" class="btn effect01"><span>Bestellen</span></a>
+            <a href="{{ route('menu.index') }}" class="btn effect01"><span>Bestellen</span></a>
         </div>
       </div> 
       
@@ -80,7 +80,7 @@
             <div>
                 <h3>Services</h3>
                 <ul>
-                  <li><a href="#">Bestellen</a></li>
+                  <li><a href="{{ route('menu.index') }}">Bestellen</a></li>
                   <li><a href="{{ route('login') }}">Inloggen</a></li>
               </ul>
             </div>
