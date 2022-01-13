@@ -4,14 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use function Psy\debug;
 
 class Ingredient extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     public function ingredients()
     {
         // tweede parameter geeft de tussentabel (naam)
+
         return $this->belongsToMany(Menu::class, 'menu_ingredients', 'menu_id', 'ingredient_id');
+
     }
 }

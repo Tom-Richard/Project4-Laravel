@@ -11,7 +11,10 @@ class Menu extends Model
 
     public function ingredients()
     {
-        // tweede parameter geeft de tussentabel (naam)
+        // tweede parameter geeft de tussentabel (naam)/
+
+
         return $this->belongsToMany(Ingredient::class, 'menu_ingredients', 'menu_id', 'ingredient_id');
     }
+
 }
