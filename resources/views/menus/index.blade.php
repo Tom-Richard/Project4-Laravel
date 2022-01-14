@@ -8,11 +8,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="CSS/Default.css">
-<link rel="stylesheet" href="{{ URL::asset('css/CSS/Default.css'); }}"> 
+<link rel="stylesheet" href="{{ URL::asset('css/CSS/Default.css'); }}">
 
 </head>
 <body>
-    
+
     <a id="backtop" href="#top" onclick="hide()">^</a>
 
     <header id="top" class="header1">
@@ -25,7 +25,7 @@
         <p class="header__log--text">Inloggen</p>
     </div>
     </header>
-    
+
     <div class="Container1" style="margin-top: 10vw;">
     @foreach ($menus as $menu)
                     <div class="FBlist">
@@ -33,7 +33,7 @@
 
                         <div style="margin-left: 20px">
                             <div><strong>Naam:</strong> {{ $menu->name }}</div>
-                            <div><strong>Prijs:</strong> WIP</div>
+                            <div><strong>Prijs:</strong> €{{ number_format($menu->price(), 2)}}</div>
                             <div><strong>Formaat:</strong> <select><option>Klein</option><option selected>Middel</option><option>Groot</option></select></div>
 
                             <div>
@@ -42,7 +42,7 @@
                         <p style="position: absolute; width: 300px; right: 0; font-size: medium; color: aquamarine;">Dit product is op voorraad</p>
                         <a style="position: absolute; width: 300px; left: 0; font-size: medium;" href="{{ route('menu.edit',$menu->id) }}"><img src="images/6.png" style="max-width: 50px; margin-left: 10px;"></a>
 
-                       
+
                     </div>
      @endforeach
  </div>

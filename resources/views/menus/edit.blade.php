@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="CSS/Default.css">
-<link rel="stylesheet" href="{{ URL::asset('css/CSS/Default.css'); }}">
+<link rel="stylesheet" href="{{ URL::asset('css/CSS/Default.css') }}">
 
 </head>
 <body>
@@ -29,15 +29,23 @@
     <p style="text-align: center; margin-top: 3vw;">U bewerkt momenteel: <strong>Pizza {{ $menu->name}}</strong></p>
     <div class="fb3">
         <div style="border-top: none;"><p><strong>Ingredientenlijst</strong></p></div>
-        
+
     @foreach ($menu->ingredients as $ingredients)
         <div class="fb4">
             <div style="width: 700px;"><p>{{ $ingredients['ingredient'] }}</p></div>
             <div><p>€ {{ $ingredients['price100g'] }}</p></div>
-            <div><button id="btn5">Verwijder</button></div>
+            <div>
+                <form action="{{ route('menu.destroy',[$menu->id , $ingredients['id']]) }}" method="POST" style="height: 100%">
+
+                    @csrf
+                    @method('DELETE')
+                    <button id="btn5" type="submit">Verwijder</button>
+                </form>
+            </div>
+
         </div>
     @endforeach
-        
+
         <div class="fb4">
             <div style="width: 700px;"><p>Ingrediënt toevoegen</p></div>
             <select id="select" style="text-align: center;">
@@ -77,9 +85,9 @@
 </body>
 <script>
     window.onscroll = function(ev) {
-    
+
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-        
+
         document.getElementById("backtop").style.display = "block"
     }
     document.getElementById("backtop").addEventListener("click", click);

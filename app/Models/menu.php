@@ -16,5 +16,16 @@ class Menu extends Model
 
         return $this->belongsToMany(Ingredient::class, 'menu_ingredients', 'menu_id', 'ingredient_id');
     }
+    public function price()
+    {
+        $price = 0;
+        foreach ($this->ingredients as $ingredient)
+        {
+            $price += $ingredient->price100g;
+
+        }
+        return $price;
+
+    }
 
 }

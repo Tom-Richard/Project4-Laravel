@@ -16,11 +16,7 @@ class MenuController extends Controller
         $menus = Menu::all();
         $ingredienten = Ingredient::all();
 
-        foreach ($menus as $menu) {
-            $ingredient = $menu->ingredients;
-            echo $ingredient->sum('price100g');
-            }
-        //return view('menus.index',compact('menus'));
+        return view('menus.index',compact('menus'));
     }
     public function edit($menu)
     {
@@ -32,5 +28,12 @@ class MenuController extends Controller
 
         //wordt vervolgt
 
+    }
+    public function destroy(Request $request, $menuID, $IngredientID)
+    {
+        $menu = Menu::find($menuID);
+        $menu->ingredients()->detach($IngredientID);W
+
+        return redirect()->route('menus.edit');
     }
 }
