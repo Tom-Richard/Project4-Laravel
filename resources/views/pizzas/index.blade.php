@@ -46,7 +46,11 @@
                             <p><a href="#"><img src="images/4.png" style="width: 100px;"> Voeg toe aan winkelwagen </p></a></div>
                         </div>
                         <p style="position: absolute; width: 300px; right: 0; font-size: medium; color: aquamarine;">Dit product is op voorraad</p>
-                        <a style="position: absolute; width: 300px; left: 0; font-size: medium;" href="{{ route('pizza.edit',$pizza->id) }}"><img src="images/6.png" style="max-width: 50px; margin-left: 10px;"></a>
+                        <form method="post" action="{{ route('pizza.store') }}">
+                            @csrf
+                            <input style="height: 50px; width: 50px" type="image" src="images/6.png"></input>
+                            <input type="hidden" name="pizzaID" value="{{$pizza->id}}"></input>
+                        </form>
 
 
                     </div>
