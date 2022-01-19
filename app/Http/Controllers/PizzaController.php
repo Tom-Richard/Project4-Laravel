@@ -23,23 +23,33 @@ class PizzaController extends Controller
     }
     public function edit($pizzaID)
     {
-        $pizza = new Pizza;
+       /* $pizza = new Pizza;
         $selectedpizza = Pizza::findOrFail($pizzaID);
         $pizza->name = $selectedpizza->name;
         $pizza->iscustom = true;
-        $pizza->save();
-
-
+        $pizza->save();*/
         //dd($pizza->name = $menu->findid($menu));
         //Dit is niet de EDIT van de menu tabel! Met deze functie kun je ingredienten aan pizza's toevoegen of van pizza's afhalen.
         //$ingredienten = Ingredient::all();
-        $menu = $pizza;
+        $pizza = Pizza::findOrFail($pizzaID);
+
         $ingredienten = Ingredient::all();
 
         return view('pizzas.edit',compact('pizza','ingredienten'));
 
         //wordt vervolgt
 
+    }
+
+    public function store(Request $request)
+    {
+        $pizzaID = $request->input("pizzaID");
+        $pizza = new Pizza;
+        $selectedpizza = Pizza::findOrFail($pizzaID);
+        $pizza->name = $selectedpizza->name;
+        $pizza->iscustom = true;
+        $pizza->save();
+        return redirect()->route('pizza.edit', $pizza->id);
     }
 /*    public function destroy(Request $request, $menuID, $IngredientID)
     {
