@@ -41,6 +41,8 @@ class PizzaController extends Controller
         //wordt vervolgt
 
     }
+
+
 /*    public function destroy(Request $request, $menuID, $IngredientID)
     {
         $menu = Menu::find($menuID);

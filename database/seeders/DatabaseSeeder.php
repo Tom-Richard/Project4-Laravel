@@ -18,9 +18,10 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             RoleSeeder::class,
             UserRoleSeeder::class,
+            UnitSeeder::class,
             IngredientSeeder::class,
-            MenuSeeder::class,
-            SizesSeeder::class,
+            PizzaSeeder::class,
+            SizesSeeder::class
         ]);
         // \App\Models\User::factory(10)->create();
     }
