@@ -49,6 +49,11 @@ class PizzaController extends Controller
         $pizza->name = $selectedpizza->name;
         $pizza->iscustom = true;
         $pizza->save();
+        foreach ($selectedpizza->ingredients as $ingredient)
+        {
+            $pizza->ingredients()->attach($ingredient);
+        }
+
         return redirect()->route('pizza.edit', $pizza->id);
     }
 /*    public function destroy(Request $request, $menuID, $IngredientID)

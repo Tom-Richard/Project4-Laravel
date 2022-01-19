@@ -32,7 +32,7 @@
 
     @foreach ($pizza->ingredients as $ingredients)
         <div class="fb4">
-            <div style="width: 700px;"><p>{{ $ingredients['ingredient'] }}</p></div>
+            <div style="width: 700px;"><p>{{ $ingredients['name'] }}</p></div>
             <div><p>€ {{ $ingredients['price'] }}</p></div>
             <div>
                 <form action="{{ route('pizza.destroy',[$pizza->id , $ingredients['id']]) }}" method="POST" style="height: 100%">
