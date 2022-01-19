@@ -6,6 +6,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PizzaController;
+use App\Http\Controllers\Pizza\PizzaIngredientController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -37,8 +38,8 @@ Route::group(['middleware'=>'auth'], function(){
     Route::resource('employee', EmployeeController::class);
     Route::resource('customer', CustomerController::class);
 
-
-});
+    Route::post('/pizza/{pizza_id}/ingredient', [PizzaIngredientController::class, 'store'])->middleware(['auth'])->name('pizzaingredient.store');
+    Route::delete('/pizza/{pizza_id}/ingredient/{ingredient_id}', [PizzaIngredientController::class, 'destroy'])->middleware(['auth'])->name('pizzaingredient.destroy');});
 
 
 require __DIR__.'/auth.php';

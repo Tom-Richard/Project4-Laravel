@@ -30,17 +30,15 @@
     <div class="fb3">
         <div style="border-top: none;"><p><strong>Ingredientenlijst</strong></p></div>
 
-    @foreach ($pizza->ingredients as $ingredients)
+    @foreach ($pizza->ingredients as $ingredient)
         <div class="fb4">
-            <div style="width: 700px;"><p>{{ $ingredients['name'] }}</p></div>
-            <div><p>€ {{ number_format($ingredients['price'], 2)}}</p></div>
+            <div style="width: 700px;"><p>{{ $ingredient->name }}</p></div>
+            <div><p>€ {{ number_format($ingredient->price, 2)}}</p></div>
             <div>
-                <form action="{{ route('pizza.destroy',$pizza->id)}}" method="POST" style="height: 100%">
-
+                <form action="{{ route('pizzaingredient.destroy', [$pizza->id, $ingredient->id])}}" method="POST" style="height: 100%">
                     @csrf
                     @method('DELETE')
                     <button id="btn5" type="submit">Verwijder</button>
-                    <input type="hidden" name="ingredientID" value="{{ $ingredients['id'] }}">
                 </form>
             </div>
 
@@ -49,14 +47,13 @@
 
         <div class="fb4">
             <div style="width: 700px;"><p>Ingrediënt toevoegen</p></div>
-            <form action="{{ route('pizza.create')}}" method="PUT">
+            <form action="{{ route('pizzaingredient.store', $pizza->id) }}" method="POST">
+                @csrf
                 <select name="ingredientID" style="text-align: center;">
                     @foreach ($ingredienten as $ingredient)
                         <option value="{{$ingredient->id}}">{{ $ingredient->name }}</option>
                     @endforeach
                 </select>
-                <input type="hidden" name="pizzaID" value="{{ $pizza->id }}">
-
                 <div><button type="submit" id="btn6">Voeg toe</button></div>
             </form>
 
