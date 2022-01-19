@@ -42,8 +42,10 @@ class PizzaController extends Controller
 
         foreach ($selectedPizza->ingredients as $ingredient)
         {
-              $pizza->ingredients()->attach($ingredient);
+            $selectedPizzaQuantity = $ingredient->pivot->quantity;
+            $pizza->ingredients()->attach($ingredient, ['quantity' => $selectedPizzaQuantity]);
         }
+
 
         return redirect()->route('pizza.edit', $pizza->id);
     }

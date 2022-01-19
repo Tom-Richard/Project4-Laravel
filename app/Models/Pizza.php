@@ -14,7 +14,7 @@ class Pizza extends Model
     public function ingredients()
     {
         // tweede parameter geeft de tussentabel (naam)/
-        return $this->belongsToMany(Ingredient::class);
+        return $this->belongsToMany(Ingredient::class)->withPivot('quantity');;
     }
 
     public function orders()
