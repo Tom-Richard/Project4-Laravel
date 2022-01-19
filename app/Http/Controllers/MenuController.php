@@ -21,11 +21,19 @@ class MenuController extends Controller
         $sizes = Size::all();
         return view('menus.index',compact('menus', 'sizes'));
     }
-    public function edit($menu)
+    public function edit($pizzaID)
     {
+        $pizza = new Menu;
+        $selectedpizza = Menu::findOrFail($pizzaID);
+        $pizza->name = $selectedpizza->name;
+        $pizza->iscustom = true;
+        $pizza->save();
+
+
+        //dd($pizza->name = $menu->findid($menu));
         //Dit is niet de EDIT van de menu tabel! Met deze functie kun je ingredienten aan pizza's toevoegen of van pizza's afhalen.
         //$ingredienten = Ingredient::all();
-        $menu = Menu::find($menu);
+        $menu = $pizza;
         $ingredienten = Ingredient::all();
 
         return view('menus.edit',compact('menu','ingredienten'));
