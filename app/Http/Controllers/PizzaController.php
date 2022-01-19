@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use http\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +20,15 @@ class PizzaController extends Controller
         $pizzas = Pizza::where('isCustom', false)->get();
         $ingredienten = Ingredient::all();
         $sizes = Size::all();
+
+        //dd($pizzas[0]->price());
         return view('pizzas.index',compact('pizzas', 'sizes'));
+    }
+    public function pricecalculation()
+    {
+        dd("test");
+        return view('pizzas.index',compact('pizzas', 'sizes'));
+
     }
     public function edit($pizzaID)
     {
@@ -49,13 +58,34 @@ class PizzaController extends Controller
         $pizza->name = $selectedpizza->name;
         $pizza->iscustom = true;
         $pizza->save();
+        foreach ($selectedpizza->ingredients as $ingredient)
+        {
+            $pizza->ingredients()->attach($ingredient);
+        }
+
         return redirect()->route('pizza.edit', $pizza->id);
     }
-/*    public function destroy(Request $request, $menuID, $IngredientID)
+    public function destroy(Request $request, $PizzaID)
     {
-        $menu = Menu::find($menuID);
-        $menu->ingredients()->detach($IngredientID);W
+        $pizza = Pizza::find($PizzaID);
+        $IngredientID = $request->input("ingredientID");
 
-        return redirect()->route('pizzas.edit');
-    }*/
+        $pizza->ingredients()->detach($IngredientID);
+
+        return redirect()->route('pizza.edit', $PizzaID);
+    }
+    public function create(Request $request)
+    {
+        $PizzaID = $request->input("pizzaID");
+
+        $pizza = Pizza::find($PizzaID);
+        $IngredientID = $request->input("ingredientID");
+
+        if (! $pizza->ingredients->contains($IngredientID)) {
+            $pizza->ingredients()->attach($IngredientID);
+        }
+
+        return redirect()->route('pizza.edit', $PizzaID);
+
+    }
 }

@@ -17,7 +17,7 @@ class CreatePizzaIngredientTable extends Migration
             $table->id();
             $table->foreignId('pizzaId')->nullable(false)->references('id')->on('pizzas')->cascadeOnDelete();
             $table->foreignId('ingredientId')->nullable(false)->references('id')->on('ingredients')->cascadeOnDelete();
-            $table->bigInteger('quantity')->nullable(false);
+            $table->bigInteger('quantity')->nullable(false)->default('1');
         });
     }
 
