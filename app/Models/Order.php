@@ -13,7 +13,7 @@ class Order extends Model
     public function pizzas()
     {
         // tweede parameter geeft de tussentabel (naam)
-        return $this->belongsToMany(Pizza::class, 'pizza_order', 'pizzaId', 'ingredientId');
+        return $this->belongsToMany(Pizza::class);
     }
 
     public function status()

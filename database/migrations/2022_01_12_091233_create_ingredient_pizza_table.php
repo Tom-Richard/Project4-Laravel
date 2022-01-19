@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePizzaIngredientTable extends Migration
+class CreateIngredientPizzaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreatePizzaIngredientTable extends Migration
      */
     public function up()
     {
-        Schema::create('pizza_ingredient', function (Blueprint $table) {
+        Schema::create('ingredient_pizza', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pizzaId')->nullable(false)->references('id')->on('pizzas')->cascadeOnDelete();
-            $table->foreignId('ingredientId')->nullable(false)->references('id')->on('ingredients')->cascadeOnDelete();
-            $table->bigInteger('quantity')->nullable(false)->default('1');
+            $table->foreignId('pizza_id')->nullable(false)->references('id')->on('pizzas')->cascadeOnDelete();
+            $table->foreignId('ingredient_id')->nullable(false)->references('id')->on('ingredients')->cascadeOnDelete();
+            $table->bigInteger('quantity')->nullable(false)->default(1);
         });
     }
 

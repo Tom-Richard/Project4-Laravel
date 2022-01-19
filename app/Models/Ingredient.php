@@ -14,7 +14,7 @@ class Ingredient extends Model
     public function pizzas()
     {
         // tweede parameter geeft de tussentabel (naam)
-        return $this->belongsToMany(Pizza::class, 'pizza_ingredient', 'pizzaId', 'ingredientId');
+        return $this->belongsToMany(Pizza::class);
     }
 
     public function unit()

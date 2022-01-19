@@ -18,7 +18,7 @@ class CreateIngredientsTable extends Migration
             $table->string('name')->nullable(false);
             $table->double('price', 4, 2)->nullable(false);
             $table->bigInteger('quantity')->nullable(false);
-            $table->foreignId('unitId')->nullable(false)->references('id')->on('units')->cascadeOnDelete();
+            $table->foreignId('unit_id')->nullable(false)->references('id')->on('units')->cascadeOnDelete();
         });
     }
 

@@ -15,9 +15,9 @@ class CreateOrdertransactionsTable extends Migration
     {
         Schema::create('ordertransactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('orderId')->nullable(false)->references('id')->on('orders')->cascadeOnDelete();
-            $table->foreignId('employeeId')->nullable(false)->references('id')->on('employees')->cascadeOnDelete();
-            $table->foreignId('toStatusId')->nullable(false)->references('id')->on('statuses')->cascadeOnDelete();
+            $table->foreignId('order_id')->nullable(false)->references('id')->on('orders')->cascadeOnDelete();
+            $table->foreignId('employee_id')->nullable(false)->references('id')->on('employees')->cascadeOnDelete();
+            $table->foreignId('to_status_id')->nullable(false)->references('id')->on('statuses')->cascadeOnDelete();
             $table->timestamps();
         });
     }

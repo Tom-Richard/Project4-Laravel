@@ -17,29 +17,15 @@ class PizzaController extends Controller
 {
     public function index()
     {
-        $pizzas = Pizza::where('isCustom', false)->get();
-        $ingredienten = Ingredient::all();
+        $pizzas = Pizza::where('is_custom', false)->get();
         $sizes = Size::all();
 
         //dd($pizzas[0]->price());
         return view('pizzas.index',compact('pizzas', 'sizes'));
     }
-    public function pricecalculation()
-    {
-        dd("test");
-        return view('pizzas.index',compact('pizzas', 'sizes'));
 
-    }
     public function edit($pizzaID)
     {
-       /* $pizza = new Pizza;
-        $selectedpizza = Pizza::findOrFail($pizzaID);
-        $pizza->name = $selectedpizza->name;
-        $pizza->iscustom = true;
-        $pizza->save();*/
-        //dd($pizza->name = $menu->findid($menu));
-        //Dit is niet de EDIT van de menu tabel! Met deze functie kun je ingredienten aan pizza's toevoegen of van pizza's afhalen.
-        //$ingredienten = Ingredient::all();
         $pizza = Pizza::findOrFail($pizzaID);
 
         $ingredienten = Ingredient::all();
@@ -56,11 +42,12 @@ class PizzaController extends Controller
         $pizza = new Pizza;
         $selectedpizza = Pizza::findOrFail($pizzaID);
         $pizza->name = $selectedpizza->name;
-        $pizza->iscustom = true;
+        $pizza->is_custom = true;
         $pizza->save();
+
         foreach ($selectedpizza->ingredients as $ingredient)
         {
-            $pizza->ingredients()->attach($ingredient);
+              $pizza->ingredients()->attach($ingredient);
         }
 
         return redirect()->route('pizza.edit', $pizza->id);

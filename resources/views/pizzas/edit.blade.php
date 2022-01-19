@@ -33,7 +33,7 @@
     @foreach ($pizza->ingredients as $ingredients)
         <div class="fb4">
             <div style="width: 700px;"><p>{{ $ingredients['name'] }}</p></div>
-            <div><p>€ {{ $ingredients['price'] }}</p></div>
+            <div><p>€ {{ number_format($ingredients['price'], 2)}}</p></div>
             <div>
                 <form action="{{ route('pizza.destroy',$pizza->id)}}" method="POST" style="height: 100%">
 

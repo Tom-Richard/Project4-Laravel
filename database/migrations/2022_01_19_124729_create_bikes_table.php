@@ -15,9 +15,9 @@ class CreateBikesTable extends Migration
     {
         Schema::create('bikes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('brandId')->nullable(false)->references('id')->on('bikebrands')->cascadeOnDelete();
-            $table->foreignId('modelId')->nullable(false)->references('id')->on('bikemodels')->cascadeOnDelete();
-            $table->foreignId('employeeId')->nullable(false)->references('id')->on('employees')->cascadeOnDelete();
+            $table->foreignId('brand_id')->nullable(false)->references('id')->on('bikebrands')->cascadeOnDelete();
+            $table->foreignId('model_id')->nullable(false)->references('id')->on('bikemodels')->cascadeOnDelete();
+            $table->foreignId('employee_id')->nullable(false)->references('id')->on('employees')->cascadeOnDelete();
         });
     }
 

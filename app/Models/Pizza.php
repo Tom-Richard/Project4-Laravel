@@ -13,13 +13,13 @@ class Pizza extends Model
     public function ingredients()
     {
         // tweede parameter geeft de tussentabel (naam)/
-        return $this->belongsToMany(Ingredient::class, 'pizza_ingredient', 'ingredientId', 'pizzaId');
+        return $this->belongsToMany(Ingredient::class);
     }
 
     public function orders()
     {
         // tweede parameter geeft de tussentabel (naam)
-        return $this->belongsToMany(Order::class, 'pizza_order', 'orderId', 'pizzaId');
+        return $this->belongsToMany(Order::class);
     }
 
     public function size()
