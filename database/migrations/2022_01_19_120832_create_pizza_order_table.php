@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSizesTable extends Migration
+class CreatePizzaOrderTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateSizesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sizes', function (Blueprint $table) {
+        Schema::create('pizza_order', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable(false);
-            $table->float('pricefactor')->nullable(false);
+            $table->foreignId('pizzaId')->nullable(false)->references('id')->on('pizzas')->cascadeOnDelete();
+            $table->foreignId('orderId')->nullable(false)->references('id')->on('orders')->cascadeOnDelete();
         });
     }
 
@@ -27,6 +27,6 @@ class CreateSizesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sizes');
+        Schema::dropIfExists('pizza_order');
     }
 }

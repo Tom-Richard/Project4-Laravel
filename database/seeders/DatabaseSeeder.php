@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             UnitSeeder::class,
             IngredientSeeder::class,
             PizzaSeeder::class,
-            SizesSeeder::class
+            SizesSeeder::class,
+            StatusSeeder::class
         ]);
         // \App\Models\User::factory(10)->create();
     }

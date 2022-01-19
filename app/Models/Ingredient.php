@@ -11,12 +11,10 @@ class Ingredient extends Model
     use HasFactory;
     public $timestamps = false;
 
-    public function ingredients()
+    public function pizzas()
     {
         // tweede parameter geeft de tussentabel (naam)
-
-        return $this->belongsToMany(Menu::class, 'pizza_ingredient', 'pizzaId', 'ingredientId');
-
+        return $this->belongsToMany(Pizza::class, 'pizza_ingredient', 'pizzaId', 'ingredientId');
     }
 
     public function unit()

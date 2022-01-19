@@ -8,13 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Pizza extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     public function ingredients()
     {
         // tweede parameter geeft de tussentabel (naam)/
+        return $this->belongsToMany(Ingredient::class, 'pizza_ingredient', 'ingredientId', 'pizzaId');
+    }
 
-
-        return $this->belongsToMany(Ingredient::class, 'pizza_ingredient', 'pizzaId', 'ingredientId');
+    public function orders()
+    {
+        // tweede parameter geeft de tussentabel (naam)
+        return $this->belongsToMany(Order::class, 'pizza_order', 'orderId', 'pizzaId');
     }
 
     public function size()

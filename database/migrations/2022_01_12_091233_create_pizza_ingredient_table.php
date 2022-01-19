@@ -28,6 +28,6 @@ class CreatePizzaIngredientTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menu_ingredients');
+        Schema::dropIfExists('pizza_ingredient');
     }
 }
