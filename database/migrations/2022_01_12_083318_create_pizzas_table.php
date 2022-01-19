@@ -18,7 +18,6 @@ class CreatePizzasTable extends Migration
             $table->string('name')->nullable(false);
             $table->boolean('isCustom')->nullable(false);
             $table->foreignId('sizeId')->nullable(true)->references('id')->on('sizes')->cascadeOnDelete();
-            $table->timestamps();
         });
     }
 

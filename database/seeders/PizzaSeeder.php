@@ -18,13 +18,13 @@ class PizzaSeeder extends Seeder
     public function run()
     {
         $pizzas = [
-            ['id' => 1, 'name' => 'Mozerella', 'isCustom' => 0, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['id' => 2, 'name' => 'Hawaii', 'isCustom' => 0, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['id' => 3, 'name' => 'Margerita', 'isCustom' => 0, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['id' => 1, 'name' => 'Mozerella', 'isCustom' => 0],
+            ['id' => 2, 'name' => 'Hawaii', 'isCustom' => 0],
+            ['id' => 3, 'name' => 'Margerita', 'isCustom' => 0],
         ];
 
         foreach ($pizzas as $pizza) {
-            Pizza::create($pizza);
+            Pizza::insert($pizza);
         }
     }
 }

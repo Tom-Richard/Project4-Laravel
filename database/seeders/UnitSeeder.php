@@ -15,17 +15,17 @@ class UnitSeeder extends Seeder
      */
     public function run()
     {
-        Unit::create([
+        Unit::insert([
             'id' => '1',
             'name' => '100gr',
         ]);
 
-        Unit::create([
+        Unit::insert([
             'id' => '2',
             'name' => '1 stuk',
         ]);
 
-        Unit::create([
+        Unit::insert([
             'id' => '3',
             'name' => '100ml',
         ]);

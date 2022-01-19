@@ -22,7 +22,7 @@ class SizesSeeder extends Seeder
         ];
 
         foreach ($sizes as $size) {
-            Size::create($size);
+            Size::insert($size);
         }
     }
 }

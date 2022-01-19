@@ -26,7 +26,7 @@ class UserRoleSeeder extends Seeder
         ];
 
         foreach ($userRoles as $userRole) {
-            UserRole::create($userRole);
+            UserRole::insert($userRole);
         }
     }
 }

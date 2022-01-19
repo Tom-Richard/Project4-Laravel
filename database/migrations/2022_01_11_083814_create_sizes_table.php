@@ -17,7 +17,6 @@ class CreateSizesTable extends Migration
             $table->id();
             $table->string('name')->nullable(false);
             $table->float('pricefactor')->nullable(false);
-            $table->timestamps();
         });
     }
 
