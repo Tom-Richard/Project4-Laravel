@@ -13,6 +13,6 @@ class IngredientController extends Controller
         $ingredient->find($this->id)->tags()->detach();
 
 
-        return redirect()->route('menus.index');
+        return redirect()->route('pizzas.index');
     }
 }

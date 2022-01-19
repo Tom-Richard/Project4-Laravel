@@ -29,7 +29,7 @@ class CreatePizzasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menus');
+        Schema::dropIfExists('pizzas');
     }
 }
 

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Menu extends Model
+class Pizza extends Model
 {
     use HasFactory;
 
@@ -14,14 +14,20 @@ class Menu extends Model
         // tweede parameter geeft de tussentabel (naam)/
 
 
-        return $this->belongsToMany(Ingredient::class, 'menu_ingredients', 'menu_id', 'ingredient_id');
+        return $this->belongsToMany(Ingredient::class, 'pizza_ingredient', 'pizzaId', 'ingredientId');
     }
+
+    public function size()
+    {
+        return $this->belongsTo(Size::class);
+    }
+
     public function price()
     {
         $price = 0;
         foreach ($this->ingredients as $ingredient)
         {
-            $price += $ingredient->price100g;
+            $price += $ingredient->price;
 
         }
         return $price;

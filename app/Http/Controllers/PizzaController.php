@@ -5,26 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Menu;
+use App\Models\Pizza;
 use App\Models\Ingredient;
 use App\Models\Size;
 
 
 
 
-class MenuController extends Controller
+class PizzaController extends Controller
 {
     public function index()
     {
-        $menus = Menu::all();
+        $pizzas = Pizza::where('isCustom', false)->get();
         $ingredienten = Ingredient::all();
         $sizes = Size::all();
-        return view('menus.index',compact('menus', 'sizes'));
+        return view('pizzas.index',compact('pizzas', 'sizes'));
     }
     public function edit($pizzaID)
     {
-        $pizza = new Menu;
-        $selectedpizza = Menu::findOrFail($pizzaID);
+        $pizza = new Pizza;
+        $selectedpizza = Pizza::findOrFail($pizzaID);
         $pizza->name = $selectedpizza->name;
         $pizza->iscustom = true;
         $pizza->save();
@@ -36,7 +36,7 @@ class MenuController extends Controller
         $menu = $pizza;
         $ingredienten = Ingredient::all();
 
-        return view('menus.edit',compact('menu','ingredienten'));
+        return view('pizzas.edit',compact('pizza','ingredienten'));
 
         //wordt vervolgt
 
@@ -46,6 +46,6 @@ class MenuController extends Controller
         $menu = Menu::find($menuID);
         $menu->ingredients()->detach($IngredientID);W
 
-        return redirect()->route('menus.edit');
+        return redirect()->route('pizzas.edit');
     }*/
 }

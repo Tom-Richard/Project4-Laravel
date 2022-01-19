@@ -14,4 +14,9 @@ class Size extends Model
         'name',
         'pricefactor'
     ];
+
+    public function pizzas()
+    {
+        return $this->hasMany(Pizza::class);
+    }
 }

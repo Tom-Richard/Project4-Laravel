@@ -7,11 +7,11 @@
 <title>StonksPizza</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="{{ URL::asset('css/CSS/Default.css'); }}"> 
+<link rel="stylesheet" href="{{ URL::asset('css/CSS/Default.css'); }}">
 
 </head>
 <body>
-    
+
     <a id="backtop" href="#top" onclick="hide()">^</a>
 
     <header id="top" class="header">
@@ -34,7 +34,7 @@
     </div>
     @endauth
     @endif
-    
+
     </header>
 
     <img src="images/1.png" class="Images" id="Spin">
@@ -71,16 +71,16 @@
 
      <div class="buttons">
         <div class="container">
-            <a href="{{ route('menu.index') }}" class="btn effect01"><span>Bestellen</span></a>
+            <a href="{{ route('pizza.index') }}" class="btn effect01"><span>Bestellen</span></a>
         </div>
-      </div> 
-      
+      </div>
+
       <footer>
           <div class="fb2">
             <div>
                 <h3>Services</h3>
                 <ul>
-                  <li><a href="{{ route('menu.index') }}">Bestellen</a></li>
+                  <li><a href="{{ route('pizza.index') }}">Bestellen</a></li>
                   <li><a href="{{ route('login') }}">Inloggen</a></li>
               </ul>
             </div>
