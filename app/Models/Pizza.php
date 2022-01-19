@@ -33,8 +33,8 @@ class Pizza extends Model
         $price = 0;
         foreach ($this->ingredients as $ingredient)
         {
-            $price += $ingredient->price;
-
+            $ingredientprice = $ingredient->price * $ingredient->pivot->quantity;
+            $price +=  $ingredientprice;
         }
         return $price;
 

@@ -41,5 +41,9 @@ Route::group(['middleware'=>'auth'], function(){
     Route::post('/pizza/{pizza_id}/ingredient', [PizzaIngredientController::class, 'store'])->middleware(['auth'])->name('pizzaingredient.store');
     Route::delete('/pizza/{pizza_id}/ingredient/{ingredient_id}', [PizzaIngredientController::class, 'destroy'])->middleware(['auth'])->name('pizzaingredient.destroy');});
 
+    Route::get('/cart/', [\App\Http\Controllers\CartController::class, 'index'])->middleware(['auth'])->name('cart.index');
+    Route::post('/cart/pizza/{pizza_id}', [\App\Http\Controllers\Cart\CartPizzaController::class, 'store'])->middleware(['auth'])->name('cartpizza.store');
+    Route::delete('/cart/pizza/{pizza_id}', [\App\Http\Controllers\Cart\CartPizzaController::class, 'destroy'])->middleware(['auth'])->name('cartpizza.destroy');
+
 
 require __DIR__.'/auth.php';

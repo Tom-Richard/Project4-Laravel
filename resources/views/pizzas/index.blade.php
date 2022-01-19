@@ -43,7 +43,7 @@
                             </div>
 
                             <div>
-                            <p><a href="#"><img src="{{ asset('images/4.png') }}" style="width: 100px;"> Voeg toe aan winkelwagen </p></a></div>
+                                <p><form method="post" action="{{route('cartpizza.store', $pizza->id)}}">@csrf<input type="image" src="{{ asset('images/4.png') }}" style="width: 100px;"></form> Voeg toe aan winkelwagen </p></div>
                         </div>
                         <p style="position: absolute; width: 300px; right: 0; font-size: medium; color: aquamarine;">Dit product is op voorraad</p>
                         <form method="post" action="{{ route('pizza.store') }}">
