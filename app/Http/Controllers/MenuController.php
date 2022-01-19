@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Menu;
 use App\Models\Ingredient;
+use App\Models\Size;
+
+
 
 
 class MenuController extends Controller
@@ -15,8 +18,8 @@ class MenuController extends Controller
     {
         $menus = Menu::all();
         $ingredienten = Ingredient::all();
-
-        return view('menus.index',compact('menus'));
+        $sizes = Size::all();
+        return view('menus.index',compact('menus', 'sizes'));
     }
     public function edit($menu)
     {
@@ -24,16 +27,17 @@ class MenuController extends Controller
         //$ingredienten = Ingredient::all();
         $menu = Menu::find($menu);
         $ingredienten = Ingredient::all();
+
         return view('menus.edit',compact('menu','ingredienten'));
 
         //wordt vervolgt
 
     }
-    public function destroy(Request $request, $menuID, $IngredientID)
+/*    public function destroy(Request $request, $menuID, $IngredientID)
     {
         $menu = Menu::find($menuID);
         $menu->ingredients()->detach($IngredientID);W
 
         return redirect()->route('menus.edit');
-    }
+    }*/
 }

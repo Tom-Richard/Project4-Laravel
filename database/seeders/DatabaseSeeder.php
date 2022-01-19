@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             UserRoleSeeder::class,
             IngredientSeeder::class,
             MenuSeeder::class,
+            SizesSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
     }
