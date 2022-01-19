@@ -35,11 +35,12 @@
             <div style="width: 700px;"><p>{{ $ingredients['name'] }}</p></div>
             <div><p>€ {{ $ingredients['price'] }}</p></div>
             <div>
-                <form action="{{ route('pizza.destroy',[$pizza->id , $ingredients['id']]) }}" method="POST" style="height: 100%">
+                <form action="{{ route('pizza.destroy',$pizza->id)}}" method="POST" style="height: 100%">
 
                     @csrf
                     @method('DELETE')
                     <button id="btn5" type="submit">Verwijder</button>
+                    <input type="hidden" name="ingredientID" value="{{ $ingredients['id'] }}">
                 </form>
             </div>
 
@@ -48,12 +49,17 @@
 
         <div class="fb4">
             <div style="width: 700px;"><p>Ingrediënt toevoegen</p></div>
-            <select id="select" style="text-align: center;">
-                @foreach ($ingredienten as $ingredient)
-                <option>{{ $ingredient->name }}</option>
-                @endforeach
-            </select>
-            <div><button id="btn6">Voeg toe</button></div>
+            <form action="{{ route('pizza.create')}}" method="PUT">
+                <select name="ingredientID" style="text-align: center;">
+                    @foreach ($ingredienten as $ingredient)
+                        <option value="{{$ingredient->id}}">{{ $ingredient->name }}</option>
+                    @endforeach
+                </select>
+                <input type="hidden" name="pizzaID" value="{{ $pizza->id }}">
+
+                <div><button type="submit" id="btn6">Voeg toe</button></div>
+            </form>
+
         </div>
     </div>
 
