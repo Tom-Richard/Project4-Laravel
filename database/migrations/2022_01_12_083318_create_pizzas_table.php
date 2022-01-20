@@ -16,9 +16,6 @@ class CreatePizzasTable extends Migration
         Schema::create('pizzas', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable(false);
-            $table->boolean('is_custom')->nullable(false);
-            $table->foreignId('size_id')->nullable(true)->references('id')->on('sizes')->cascadeOnDelete();
-            $table->foreignId('user_id')->nullable(true)->references('id')->on('users')->cascadeOnDelete();
         });
     }
 
