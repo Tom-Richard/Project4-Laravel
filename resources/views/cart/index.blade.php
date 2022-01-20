@@ -18,7 +18,7 @@
         @foreach($pizza->ingredients as $ingredient)
             <p>{{ $ingredient->name }} {{$ingredient->pivot->quantity}}x</p>
         @endforeach
-        <p>€{{ number_format($pizza->price(), 2) }}</p>
+        <p>€{{ number_format($pizza->price(), 2, ",", ".") }}</p>
         <form method="POST" action="{{route('cartpizza.destroy', $pizza_id)}}">
             @csrf
             @method('DELETE')
@@ -26,7 +26,8 @@
         </form>
     @endforeach
 @endif
-<p>Totaalprijs: €{{ number_format($pricetotal, 2)}}</p>
+<p>Totaalprijs: €{{ number_format($pricetotal, 2, ",", ".")}}</p>
+<a href="{{route('order.index')}}">Verder naar bestellen</a>
 </body>
 </html>
 

@@ -17,9 +17,10 @@ class CartController extends Controller
     {
         $pricetotal = 0.00;
         $pizzas = Session::get('cart.pizzas');
-        foreach($pizzas as $pizza)
-        {
-            $pricetotal += $pizza->price();
+        if($pizzas != null) {
+            foreach ($pizzas as $pizza) {
+                $pricetotal += $pizza->price();
+            }
         }
 
         return view('cart.index', compact('pizzas', 'pricetotal'));

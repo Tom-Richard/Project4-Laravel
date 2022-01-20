@@ -19,7 +19,6 @@ class CartPizzaController extends Controller
     {
         $pizza = Pizza::findOrFail($pizza_id);
         Session::push('cart.pizzas', $pizza);
-
         return redirect()->route('cart.index');
     }
 

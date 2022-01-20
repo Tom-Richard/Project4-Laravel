@@ -33,7 +33,7 @@
 
                         <div style="margin-left: 20px">
                             <div><strong>Naam:</strong> {{ $pizza->name }}</div>
-                            <div id="price"><strong>Prijs:</strong> €{{ number_format($pizza->price(), 2)}}</div>
+                            <div id="price"><strong>Prijs:</strong> €{{ number_format($pizza->price(), 2, ",", ".")}}</div>
                             <div><strong>Formaat:</strong>
                                 <select name="Formaat" id="ddlViewBy">
                                 @foreach($sizes as $size)

@@ -28,10 +28,12 @@ class PizzaController extends Controller
         $pizza = Pizza::findOrFail($pizzaID);
         $ingredienten = Ingredient::all();
 
-        if($pizza->user_id == auth()->user()->id) {
+        if($pizza->user_id == auth()->user()->id)
+        {
             return view('pizzas.edit', compact('pizza', 'ingredienten'));
         }
-        else {
+        else
+        {
             abort(404);
         }
     }
@@ -42,6 +44,7 @@ class PizzaController extends Controller
         $selectedPizza = Pizza::findOrFail($selectedPizzaID);
         $pizza = $selectedPizza->replicate()->fill([
            'is_custom' => true,
+           'is_editable' => true,
            'user_id' => auth()->user()->id
         ]);
         $pizza->save();

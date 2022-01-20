@@ -21,14 +21,8 @@
         <p>€{{ number_format($pizza->price(), 2, ",", ".") }}</p>
     @endforeach
     <p>Totaalprijs: €{{ number_format($pricetotal, 2, ",", ".")}}</p>
-    <form method="POST" action="{{route('order.store')}}">
-        @csrf
-        <button type="submit">Bestellen</button>
-    </form>
-@else
-    <p>Geen pizza's toegevoegd aan winkelwagentje.</p>
 @endif
-
+<p>{{$order->status->name}}</p>
 </body>
 </html>
 

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
@@ -13,7 +15,15 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('order.index');
+        $pricetotal = 0.00;
+        $pizzas = Session::get('cart.pizzas');
+        if($pizzas != null) {
+            foreach ($pizzas as $pizza) {
+                $pricetotal += $pizza->price();
+            }
+        }
+
+        return view('order.index', compact('pizzas', 'pricetotal'));
     }
 
     /**
@@ -34,7 +44,24 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $pizzas = Session::get('cart.pizzas');
+       if($pizzas != null) {
+           $order = new Order();
+           $order->customer_id = auth()->user()->id;
+
+           $order->status()->associate(1);
+           $order->save();
+
+           foreach ($pizzas as $pizza_id => $pizza) {
+               $order->pizzas()->attach($pizza);
+           }
+           Session::forget('cart.pizzas');
+           return redirect()->route('order.show', $order->id);
+       }
+       else
+       {
+           return redirect()->route('pizza.index');
+       }
     }
 
     /**
@@ -45,7 +72,21 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+        $order = Order::findOrFail($id);
+        $pricetotal = 0.00;
+        $pizzas = $order->pizzas;
+        foreach($pizzas as $pizza)
+        {
+            $pricetotal += $pizza->price();
+        }
+
+        if($order->customer_id == auth()->user()->id)
+        {
+            return view('order.show', compact('pizzas', 'pricetotal', 'order'));
+        }
+        else {
+            abort(404);
+        }
     }
 
     /**

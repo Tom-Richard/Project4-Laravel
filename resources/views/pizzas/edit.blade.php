@@ -33,7 +33,7 @@
     @foreach ($pizza->ingredients as $ingredient)
         <div class="fb4">
             <div style="width: 700px;"><p>{{ $ingredient->name }}</p></div>
-            <div><p>€ {{ number_format($ingredient->price, 2)}}</p></div>
+            <div><p>€ {{ number_format($ingredient->price, 2, ",", ".")}}</p></div>
             <div>
                 <form action="{{ route('pizzaingredient.destroy', [$pizza->id, $ingredient->id])}}" method="POST" style="height: 100%">
                     @csrf
@@ -56,6 +56,7 @@
                 </select>
                 <div><button type="submit" id="btn6">Voeg toe</button></div>
             </form>
+            <p><form method="post" action="{{route('cartpizza.store', $pizza->id)}}">@csrf<input type="image" src="{{ asset('images/4.png') }}" style="width: 100px;"></form> Voeg toe aan winkelwagen </p></div>
 
         </div>
     </div>
