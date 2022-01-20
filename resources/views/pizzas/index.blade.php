@@ -45,16 +45,21 @@
                         <div style="margin-left: 20px">
                             <div><strong>Naam:</strong> {{ $pizza->name }}</div>
                             <div id="price"><strong>Prijs:</strong> €{{ number_format($pizza->price(), 2, ",", ".")}}</div>
-                            <div><strong>Formaat:</strong>
-                                <select name="Formaat" id="ddlViewBy">
-                                @foreach($sizes as $size)
-                                <option @if($size->name == 'Middel') selected @endif>{{$size->name}}</option>
-                                @endforeach
-                                </select>
-                            </div>
+
 
                             <div>
-                                <p><form method="post" action="{{route('cartpizza.store', $pizza->id)}}">@csrf<input type="image" src="{{ asset('images/4.png') }}" style="width: 100px;"></form> Voeg toe aan winkelwagen </p></div>
+                                <form method="post" action="{{route('cartpizza.store', $pizza->id)}}">
+                                    @csrf
+                                    <input type="image" src="{{ asset('images/4.png') }}" style="width: 100px;">
+                                    <div><strong>Formaat:</strong>
+                                        <select name="Formaat" id="ddlViewBy">
+                                            @foreach($sizes as $size)
+                                                <option @if($size->name == 'Middel') selected @endif>{{$size->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                         <p style="position: absolute; width: 300px; right: 0; font-size: medium; color: aquamarine;">Dit product is op voorraad</p>
                         <form method="post" action="{{ route('pizza.store') }}">
