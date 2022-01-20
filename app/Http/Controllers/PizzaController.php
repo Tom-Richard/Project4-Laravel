@@ -27,10 +27,11 @@ class PizzaController extends Controller
     {
         $pizza = Pizza::findOrFail($pizzaID);
         $ingredienten = Ingredient::all();
+        $sizes = Size::all();
 
         if($pizza->user_id == auth()->user()->id)
         {
-            return view('pizzas.edit', compact('pizza', 'ingredienten'));
+            return view('pizzas.edit', compact('pizza', 'ingredienten', 'sizes'));
         }
         else
         {

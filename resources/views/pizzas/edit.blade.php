@@ -53,10 +53,29 @@
                     @endforeach
                 </select>
                 <div><button type="submit" id="btn6">Voeg toe</button></div>
-            </form>
-            <p><form method="post" action="{{route('cartpizza.store', $pizza->id)}}">@csrf<input type="image" src="{{ asset('images/4.png') }}" style="width: 100px;"></form> Voeg toe aan winkelwagen </p></div>
 
+            </form>
+            <div style="width: 200px"></div>
         </div>
+
+            <div>
+                <form method="post" action="{{route('cartpizza.store', $pizza->id)}}">
+                    @csrf
+                    <input type="image" src="{{ asset('images/4.png') }}" style="width: 100px;">
+                    <div>
+                        <p>Formaat:</p>
+                        <select style="width: 200px; text-align: center; vertical-align: center">
+                            @foreach($sizes as $size)
+                                <option @if($size->name == 'Middel') selected @endif>{{$size->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                </form>
+            </div>
+
+
+
     </div>
 
       <footer>
