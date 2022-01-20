@@ -37,7 +37,10 @@ class Pizza extends Model
             $price +=  $ingredientprice;
         }
         return $price;
-
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

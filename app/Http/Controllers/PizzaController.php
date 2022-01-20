@@ -28,7 +28,12 @@ class PizzaController extends Controller
         $pizza = Pizza::findOrFail($pizzaID);
         $ingredienten = Ingredient::all();
 
-        return view('pizzas.edit',compact('pizza','ingredienten'));
+        if($pizza->user_id == auth()->user()->id) {
+            return view('pizzas.edit', compact('pizza', 'ingredienten'));
+        }
+        else {
+            abort(404);
+        }
     }
 
     public function store(Request $request)
@@ -36,7 +41,8 @@ class PizzaController extends Controller
         $selectedPizzaID = $request->input("pizzaID");
         $selectedPizza = Pizza::findOrFail($selectedPizzaID);
         $pizza = $selectedPizza->replicate()->fill([
-           'is_custom' => true
+           'is_custom' => true,
+           'user_id' => auth()->user()->id
         ]);
         $pizza->save();
 

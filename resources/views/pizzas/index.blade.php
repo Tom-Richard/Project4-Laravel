@@ -37,7 +37,7 @@
                             <div><strong>Formaat:</strong>
                                 <select name="Formaat" id="ddlViewBy">
                                 @foreach($sizes as $size)
-                                <option>{{$size->name}}</option>
+                                <option @if($size->name == 'Middel') selected @endif>{{$size->name}}</option>
                                 @endforeach
                                 </select>
                             </div>

@@ -13,20 +13,20 @@
 </head>
 <body>
 @if($pizzas != null)
-    @foreach($pizzas as $pizza)
+    @foreach($pizzas as $pizza_id => $pizza)
         <p>Pizza {{$pizza->name }}</p>
         @foreach($pizza->ingredients as $ingredient)
             <p>{{ $ingredient->name }} {{$ingredient->pivot->quantity}}x</p>
         @endforeach
-        <p>{{ number_format($pizza->price(), 2) }}</p>
-        <form method="POST" action="{{route('cartpizza.destroy', $loop->index)}}">
+        <p>€{{ number_format($pizza->price(), 2) }}</p>
+        <form method="POST" action="{{route('cartpizza.destroy', $pizza_id)}}">
             @csrf
             @method('DELETE')
             <button type="submit">Verwijderen</button>
         </form>
     @endforeach
 @endif
-<p>Totaalprijs: {{ number_format($pricetotal, 2)}}</p>
+<p>Totaalprijs: €{{ number_format($pricetotal, 2)}}</p>
 </body>
 </html>
 

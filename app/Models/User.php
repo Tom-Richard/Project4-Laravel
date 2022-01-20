@@ -71,4 +71,9 @@ class User extends Authenticatable
         }
     }
     // ************************************************************************
+
+    public function pizzas()
+    {
+        return $this->hasMany(Pizza::class);
+    }
 }
