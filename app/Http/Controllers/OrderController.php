@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Order;
+use Cassandra\Custom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -46,11 +48,13 @@ class OrderController extends Controller
     {
        $orderitems = Session::get('cart.orderitems');
        if($orderitems != null) {
+           $customer = Customer::findOrFail(auth()->user()->id);
            $order = new Order();
-           $order->customer_id = auth()->user()->id;
-
+           $order->customer_id = $customer->id;
            $order->status()->associate(1);
            $order->save();
+           $customer->increment('pizza_points', 10);
+
 
            foreach ($orderitems as $orderitem_id => $orderitem) {
                  $orderitem->order()->associate($order->id);
