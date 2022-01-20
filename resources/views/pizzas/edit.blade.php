@@ -18,12 +18,6 @@
     <header id="top" class="header1">
     <div class="header__bg1"></div>
     <h1 class="header__title1" onclick="location.reload()" onmouseover="this.style.cursor='pointer'">Pizza samenstellen</h1>
-    <div class="header__log">
-        <svg class="header__log--icon" width="24" height="24" viewBox="0 0 24 24">
-            <path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path>
-        </svg>
-        <p class="header__log--text">Inloggen</p>
-    </div>
     </header>
 
     <p style="text-align: center; margin-top: 3vw;">U bewerkt momenteel: <strong>Pizza {{ $pizza->name}}</strong></p>
@@ -44,7 +38,11 @@
 
         </div>
     @endforeach
-
+        <div class="fb4">
+            <div style="width: 700px;"><p>Totaalprijs</p></div>
+            <div style="width: 500px;"><p>€ {{number_format($pizza->price(), 2, ",", ".")}}</p></div>
+            <div style="width: 200px"></div>
+        </div>
         <div class="fb4">
             <div style="width: 700px;"><p>Ingrediënt toevoegen</p></div>
             <form action="{{ route('pizzaingredient.store', $pizza->id) }}" method="POST">
