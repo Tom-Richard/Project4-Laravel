@@ -11,10 +11,9 @@ class Order extends Model
     public $timestamps = true;
     protected $guarded = ['id'];
 
-    public function pizzas()
+    public function orderitems()
     {
-        // tweede parameter geeft de tussentabel (naam)
-        return $this->belongsToMany(Pizza::class);
+        return $this->hasMany(Orderitem::class);
     }
 
     public function status()

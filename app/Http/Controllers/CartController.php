@@ -16,14 +16,14 @@ class CartController extends Controller
     public function index()
     {
         $pricetotal = 0.00;
-        $pizzas = Session::get('cart.pizzas');
-        if($pizzas != null) {
-            foreach ($pizzas as $pizza) {
-                $pricetotal += $pizza->price();
+        $orderitems = Session::get('cart.orderitems');
+        if($orderitems != null) {
+            foreach ($orderitems as $orderitem) {
+                $pricetotal += $orderitem->price();
             }
         }
 
-        return view('cart.index', compact('pizzas', 'pricetotal'));
+        return view('cart.index', compact('orderitems', 'pricetotal'));
     }
 
     /**

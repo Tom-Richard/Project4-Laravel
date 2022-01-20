@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateIngredientsOrderitemsTable extends Migration
+class CreateIngredientOrderitemTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateIngredientsOrderitemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ingredients_orderitems', function (Blueprint $table) {
+        Schema::create('ingredient_orderitem', function (Blueprint $table) {
             $table->id();
             $table->foreignId('orderitem_id')->nullable(true)->references('id')->on('orderitems')->cascadeOnDelete();
             $table->foreignId('ingredient_id')->nullable(true)->references('id')->on('ingredients')->cascadeOnDelete();

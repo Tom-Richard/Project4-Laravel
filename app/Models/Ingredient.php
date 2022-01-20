@@ -13,8 +13,12 @@ class Ingredient extends Model
 
     public function pizzas()
     {
-        // tweede parameter geeft de tussentabel (naam)
         return $this->belongsToMany(Pizza::class)->withPivot('quantity');
+    }
+
+    public function orderitems()
+    {
+        return $this->belongsToMany(Orderitem::class)->withPivot('quantity');
     }
 
     public function unit()

@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Cart\CartOrderitemController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderitemController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PizzaController;
@@ -39,13 +42,14 @@ Route::group(['middleware'=>'auth'], function(){
     Route::resource('employee', EmployeeController::class);
     Route::resource('customer', CustomerController::class);
     Route::resource('order',  OrderController::class)->middleware('auth');
+    Route::resource('orderitem',  OrderitemController::class)->middleware('auth');
 
-    Route::post('/pizza/{pizza_id}/ingredient', [PizzaIngredientController::class, 'store'])->middleware(['auth'])->name('pizzaingredient.store');
-    Route::delete('/pizza/{pizza_id}/ingredient/{ingredient_id}', [PizzaIngredientController::class, 'destroy'])->middleware(['auth'])->name('pizzaingredient.destroy');});
+    Route::post('/orderitem/{orderitem_id}/ingredient', [PizzaIngredientController::class, 'store'])->middleware(['auth'])->name('pizzaingredient.store');
+    Route::delete('/orderitem/{orderitem_id}/ingredient/{ingredient_id}', [PizzaIngredientController::class, 'destroy'])->middleware(['auth'])->name('pizzaingredient.destroy');});
 
-    Route::get('/cart/', [\App\Http\Controllers\CartController::class, 'index'])->middleware(['auth'])->name('cart.index');
-    Route::post('/cart/pizza/{pizza_id}', [\App\Http\Controllers\Cart\CartPizzaController::class, 'store'])->middleware(['auth'])->name('cartpizza.store');
-    Route::delete('/cart/pizza/{pizza_id}', [\App\Http\Controllers\Cart\CartPizzaController::class, 'destroy'])->middleware(['auth'])->name('cartpizza.destroy');
+    Route::get('/cart/', [CartController::class, 'index'])->middleware(['auth'])->name('cart.index');
+    Route::post('/cart/orderitem', [CartOrderitemController::class, 'store'])->middleware(['auth'])->name('cartorderitem.store');
+    Route::delete('/cart/orderitem/{orderitem_id}', [CartOrderitemController::class, 'destroy'])->middleware(['auth'])->name('cartorderitem.destroy');
 
 
 require __DIR__.'/auth.php';

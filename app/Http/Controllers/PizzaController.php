@@ -20,7 +20,7 @@ class PizzaController extends Controller
         $pizzas = Pizza::where('is_custom', false)->get();
         $sizes = Size::all();
 
-        return view('pizzas.index',compact('pizzas', 'sizes'));
+        return view('pizza.index',compact('pizzas', 'sizes'));
     }
 
     public function edit($pizzaID)
@@ -31,7 +31,7 @@ class PizzaController extends Controller
 
         if($pizza->user_id == auth()->user()->id)
         {
-            return view('pizzas.edit', compact('pizza', 'ingredienten', 'sizes'));
+            return view('pizza.edit', compact('pizza', 'ingredienten', 'sizes'));
         }
         else
         {
@@ -55,7 +55,6 @@ class PizzaController extends Controller
             $selectedPizzaQuantity = $ingredient->pivot->quantity;
             $pizza->ingredients()->attach($ingredient, ['quantity' => $selectedPizzaQuantity]);
         }
-
 
         return redirect()->route('pizza.edit', $pizza->id);
     }

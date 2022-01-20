@@ -12,14 +12,14 @@
 
 </head>
 <body>
-@if($pizzas != null)
-    @foreach($pizzas as $pizza_id => $pizza)
-        <p>Pizza {{$pizza->name }}</p>
-        @foreach($pizza->ingredients as $ingredient)
+@if($orderitems != null)
+    @foreach($orderitems as $orderitem_id => $orderitem)
+        <p>Pizza {{$orderitem->pizza->name}} - {{$orderitem->size->name}}</p>
+        @foreach($orderitem->ingredients as $ingredient)
             <p>{{ $ingredient->name }} {{$ingredient->pivot->quantity}}x</p>
         @endforeach
-        <p>€{{ number_format($pizza->price(), 2, ",", ".") }}</p>
-        <form method="POST" action="{{route('cartpizza.destroy', $pizza_id)}}">
+        <p>€{{ number_format($orderitem->price(), 2, ",", ".") }}</p>
+        <form method="POST" action="{{route('cartorderitem.destroy', $orderitem_id)}}">
             @csrf
             @method('DELETE')
             <button type="submit">Verwijderen</button>

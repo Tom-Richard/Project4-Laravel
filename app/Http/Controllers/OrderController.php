@@ -16,14 +16,14 @@ class OrderController extends Controller
     public function index()
     {
         $pricetotal = 0.00;
-        $pizzas = Session::get('cart.pizzas');
-        if($pizzas != null) {
-            foreach ($pizzas as $pizza) {
-                $pricetotal += $pizza->price();
+        $orderitems = Session::get('cart.orderitems');
+        if($orderitems != null) {
+            foreach ($orderitems as $orderitem) {
+                $pricetotal += $orderitem->price();
             }
         }
 
-        return view('order.index', compact('pizzas', 'pricetotal'));
+        return view('order.index', compact('orderitems', 'pricetotal'));
     }
 
     /**
@@ -44,18 +44,19 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-       $pizzas = Session::get('cart.pizzas');
-       if($pizzas != null) {
+       $orderitems = Session::get('cart.orderitems');
+       if($orderitems != null) {
            $order = new Order();
            $order->customer_id = auth()->user()->id;
 
            $order->status()->associate(1);
            $order->save();
 
-           foreach ($pizzas as $pizza_id => $pizza) {
-               $order->pizzas()->attach($pizza);
+           foreach ($orderitems as $orderitem_id => $orderitem) {
+                 $orderitem->order()->associate($order->id);
+                 $orderitem->save();
            }
-           Session::forget('cart.pizzas');
+           Session::forget('cart.orderitems');
            return redirect()->route('order.show', $order->id);
        }
        else
@@ -74,15 +75,15 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($id);
         $pricetotal = 0.00;
-        $pizzas = $order->pizzas;
-        foreach($pizzas as $pizza)
+        $orderitems = $order->orderitems;
+        foreach($orderitems as $orderitem)
         {
-            $pricetotal += $pizza->price();
+            $pricetotal += $orderitem->price();
         }
 
         if($order->customer_id == auth()->user()->id)
         {
-            return view('order.show', compact('pizzas', 'pricetotal', 'order'));
+            return view('order.show', compact('orderitems', 'pricetotal', 'order'));
         }
         else {
             abort(404);

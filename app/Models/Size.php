@@ -15,8 +15,8 @@ class Size extends Model
         'pricefactor'
     ];
 
-    public function pizzas()
+    public function orderitems()
     {
-        return $this->hasMany(Pizza::class);
+        return $this->hasMany(Orderitem::class);
     }
 }

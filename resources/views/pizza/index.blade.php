@@ -48,13 +48,14 @@
 
 
                             <div>
-                                <form method="post" action="{{route('cartpizza.store', $pizza->id)}}">
+                                <form method="post" action="{{route('cartorderitem.store')}}">
                                     @csrf
                                     <input type="image" src="{{ asset('images/4.png') }}" style="width: 100px;">
+                                    <input type="hidden" name="pizza_id" value="{{ $pizza->id }}">
                                     <div><strong>Formaat:</strong>
-                                        <select name="Formaat" id="ddlViewBy">
+                                        <select name="formaat_id" id="ddlViewBy">
                                             @foreach($sizes as $size)
-                                                <option @if($size->name == 'Middel') selected @endif>{{$size->name}}</option>
+                                                <option @if($size->name == 'Middel') selected @endif value="{{$size->id}}">{{$size->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>

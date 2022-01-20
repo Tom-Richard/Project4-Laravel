@@ -18,9 +18,9 @@ class PizzaSeeder extends Seeder
     public function run()
     {
         $pizzas = [
-            ['id' => 1, 'name' => 'Mozerella'],
-            ['id' => 2, 'name' => 'Hawaii'],
-            ['id' => 3, 'name' => 'Margerita'],
+            ['id' => 1, 'name' => 'Mozerella', 'is_custom' => false],
+            ['id' => 2, 'name' => 'Hawaii', 'is_custom' => false],
+            ['id' => 3, 'name' => 'Margerita', 'is_custom' => false],
         ];
 
         foreach ($pizzas as $pizza) {

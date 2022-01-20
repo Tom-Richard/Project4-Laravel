@@ -13,9 +13,11 @@ class CreatePizzasTable extends Migration
      */
     public function up()
     {
-        Schema::create('pizzas', function (Blueprint $table) {
+        Schema::create('pizza', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable(false);
+            $table->boolean('is_custom')->nullable(false);
+            $table->foreignId('user_id')->nullable(true)->references('id')->on('users')->cascadeOnDelete();
         });
     }
 
@@ -26,7 +28,7 @@ class CreatePizzasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pizzas');
+        Schema::dropIfExists('pizza');
     }
 }
 
