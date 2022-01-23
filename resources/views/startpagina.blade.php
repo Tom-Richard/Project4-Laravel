@@ -38,7 +38,7 @@
     </header>
 
     <img src="images/1.png" class="Images" id="Spin">
-    <p><strong>We bezorgen uw bestelling aan huis!</strong></p><br><br>
+    <p id="centeralignb"><strong>We bezorgen uw bestelling aan huis!</strong></p><br><br>
     <div class="inspringen">
         <div class="checkmark" style="float: left;"></div>
         <p class="inspringen1" style="font-size: 2vw;"> De bezorgtijd bedraagt gemiddeld slechts 20 minuten.</p><br>
