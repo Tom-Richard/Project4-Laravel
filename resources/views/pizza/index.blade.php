@@ -12,9 +12,7 @@
 
 </head>
 <body>
-
     <a id="backtop" href="#top" onclick="hide()">^</a>
-
     <header id="top" class="header1">
     <div class="header__bg1"></div>
     <h1 class="header__title1" onclick="location.reload()" onmouseover="this.style.cursor='pointer'">Ons heerlijke menu</h1>
@@ -37,16 +35,13 @@
         @endif
     </header>
 
-    <div class="Container1" style="margin-top: 10vw;">
+    <div class="Container1" style="margin-top: 2vw;">
     @foreach ($pizzas as $pizza)
                     <div class="FBlist">
                         <img src="{{ asset('images/3.png') }}" class="ImagesInList" style="max-width: 300px;">
-
                         <div style="margin-left: 20px">
                             <div><strong>Naam:</strong> {{ $pizza->name }}</div>
                             <div id="price"><strong>Prijs:</strong> €{{ number_format($pizza->price(), 2, ",", ".")}}</div>
-
-
                             <div>
                                 <form method="post" action="{{route('cartorderitem.store')}}">
                                     @csrf
@@ -68,12 +63,9 @@
                             <input style="height: 50px; width: 50px" type="image" src="{{ asset('images/6.png')}}" }}></input>
                             <input type="hidden" name="pizzaID" value="{{$pizza->id}}"></input>
                         </form>
-
-
                     </div>
      @endforeach
  </div>
-
       <footer>
           <div class="fb2">
             <div>
