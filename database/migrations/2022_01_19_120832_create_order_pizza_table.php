@@ -15,7 +15,7 @@ class CreateOrderPizzaTable extends Migration
     {
         Schema::create('order_pizza', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pizza_id')->nullable(false)->references('id')->on('pizza')->cascadeOnDelete();
+            $table->foreignId('pizza_id')->nullable(false)->references('id')->on('pizzas')->cascadeOnDelete();
             $table->foreignId('order_id')->nullable(false)->references('id')->on('orders')->cascadeOnDelete();
         });
     }

@@ -13,7 +13,7 @@ class CreatePizzasTable extends Migration
      */
     public function up()
     {
-        Schema::create('pizza', function (Blueprint $table) {
+        Schema::create('pizzas', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable(false);
             $table->boolean('is_custom')->nullable(false);

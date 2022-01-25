@@ -58,7 +58,7 @@
             @endforeach
             <div class="order-pricetotal">
                 <p>Totaalprijs: €{{ number_format($pricetotal, 2, ",", ".")}}</p>
-                <a href="{{route('order.index')}}">Verder naar bestellen</a>
+                <a href="{{route('order.create')}}">Verder naar bestellen</a>
             </div>
         @else
             <p class="order-item-warning">Geen pizza's toegevoegd aan winkelwagentje.</p>

@@ -15,7 +15,7 @@ class CreateIngredientPizzaTable extends Migration
     {
         Schema::create('ingredient_pizza', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pizza_id')->nullable(false)->references('id')->on('pizza')->cascadeOnDelete();
+            $table->foreignId('pizza_id')->nullable(false)->references('id')->on('pizzas')->cascadeOnDelete();
             $table->foreignId('ingredient_id')->nullable(false)->references('id')->on('ingredients')->cascadeOnDelete();
             $table->bigInteger('quantity')->nullable(false)->default(1);
         });

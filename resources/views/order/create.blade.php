@@ -39,7 +39,7 @@
     @foreach($orderitems as $orderitem_id => $orderitem)
         <p>Pizza {{ $orderitem->pizza->name }}</p>
         @foreach($orderitem->ingredients as $ingredient)
-            <p>{{ $ingredient->name }} {{$ingredient->pivot->quantity}}x</p>
+            <p>{{ $ingredient->name }}</p>
         @endforeach
         <p>€{{ number_format($orderitem->price(), 2, ",", ".") }}</p>
     @endforeach

@@ -448,15 +448,42 @@ main {
     border: none;
     border-radius: 2px;
     padding: 1rem;
+    margin-top: 10px;
 }
 
 .order-pricetotal {
+    display: flex;
+    flex-direction: column;
     align-self: end;
     margin: 10px 10px 0 0;
 }
 
 .order-item-warning {
     text-align: center;
+}
+
+#order-status-label {
+    text-align: center;
+}
+
+.order-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.order-status img {
+    width: 5vw;
+    max-width: 60px;
+    margin-right: 10px;
+}
+
+#refresh-button {
+    position: absolute;
+    right: 10px;
+    width: 10vw;
+    max-width: 60px;
 }
 
 footer > * {

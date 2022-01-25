@@ -35,7 +35,7 @@ class PizzaController extends Controller
         }
         else
         {
-            abort(404);
+            abort(403);
         }
     }
 

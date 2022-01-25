@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->nullable(false)->references('id')->on('customers')->cascadeOnDelete();
-            $table->foreignId('status_id')->nullable(false)->references('id')->on('statuses')->cascadeOnDelete();
+            $table->foreignId('status_id')->default(1)->nullable(false)->references('id')->on('statuses')->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@ class CreateOrderitemsTable extends Migration
     {
         Schema::create('orderitems', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pizza_id')->nullable(false)->references('id')->on('pizza')->cascadeOnDelete();
+            $table->foreignId('pizza_id')->nullable(false)->references('id')->on('pizzas')->cascadeOnDelete();
             $table->foreignId('size_id')->nullable(true)->references('id')->on('sizes')->cascadeOnDelete();
             $table->foreignId('order_id')->nullable(true)->references('id')->on('orders')->cascadeOnDelete();
         });

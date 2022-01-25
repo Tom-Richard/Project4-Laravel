@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Session;
 class OrderController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function create()
     {
         $pricetotal = 0.00;
         $orderitems = Session::get('cart.orderitems');
@@ -24,18 +24,7 @@ class OrderController extends Controller
                 $pricetotal += $orderitem->price();
             }
         }
-
-        return view('order.index', compact('orderitems', 'pricetotal'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('order.create', compact('orderitems', 'pricetotal'));
     }
 
     /**
@@ -51,15 +40,14 @@ class OrderController extends Controller
            $customer = Customer::findOrFail(auth()->user()->id);
            $order = new Order();
            $order->customer_id = $customer->id;
-           $order->status()->associate(1);
            $order->save();
            $customer->increment('pizza_points', 10);
-
 
            foreach ($orderitems as $orderitem_id => $orderitem) {
                  $orderitem->order()->associate($order->id);
                  $orderitem->save();
            }
+
            Session::forget('cart.orderitems');
            return redirect()->route('order.show', $order->id);
        }
@@ -78,31 +66,19 @@ class OrderController extends Controller
     public function show($id)
     {
         $order = Order::findOrFail($id);
-        $pricetotal = 0.00;
-        $orderitems = $order->orderitems;
-        foreach($orderitems as $orderitem)
-        {
-            $pricetotal += $orderitem->price();
-        }
-
         if($order->customer_id == auth()->user()->id)
         {
+            $pricetotal = 0.00;
+            $orderitems = $order->orderitems;
+            foreach($orderitems as $orderitem)
+            {
+                $pricetotal += $orderitem->price();
+            }
             return view('order.show', compact('orderitems', 'pricetotal', 'order'));
         }
         else {
-            abort(404);
+            abort(403);
         }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -114,17 +90,16 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $order = Order::findOrFail($id);
+        if($order->customer_id == auth()->user()->id)
+        {
+            $order->status()->associate(6);
+            $order->save();
+            return redirect()->back();
+        }
+        else
+        {
+            return abort(403);
+        }
     }
 }

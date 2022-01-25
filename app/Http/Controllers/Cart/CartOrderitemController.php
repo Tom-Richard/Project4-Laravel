@@ -21,19 +21,25 @@ class CartOrderitemController extends Controller
     {
         $pizza = Pizza::findOrFail($request->input('pizza_id'));
         $size = Size::findOrFail($request->input('formaat_id'));
-        $orderitem = new Orderitem;
-        $orderitem->pizza()->associate($pizza);
-        $orderitem->size()->associate($size);
-        $orderitem->save();
-
-        foreach ($pizza->ingredients as $ingredient)
+        if($pizza->user_id == auth()->user()->id || $pizza->is_custom == false)
         {
-            $selectedPizzaQuantity = $ingredient->pivot->quantity;
-            $orderitem->ingredients()->attach($ingredient, ['quantity' => $selectedPizzaQuantity]);
-        }
+            $orderitem = new Orderitem;
+            $orderitem->pizza()->associate($pizza);
+            $orderitem->size()->associate($size);
+            $orderitem->save();
 
-        Session::push('cart.orderitems', $orderitem);
-        return redirect()->route('cart.index');
+            foreach ($pizza->ingredients as $ingredient) {
+                $selectedPizzaQuantity = $ingredient->pivot->quantity;
+                $orderitem->ingredients()->attach($ingredient, ['quantity' => $selectedPizzaQuantity]);
+            }
+
+            Session::push('cart.orderitems', $orderitem);
+            return redirect()->route('cart.index');
+        }
+        else
+        {
+            abort(403);
+        }
     }
 
     /**

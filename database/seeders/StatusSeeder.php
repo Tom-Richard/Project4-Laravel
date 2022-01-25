@@ -38,5 +38,10 @@ class StatusSeeder extends Seeder
             'id' => '5',
             'name' => 'bezorgd',
         ]);
+
+        Status::insert([
+            'id' => '6',
+            'name' => 'geannuleerd',
+        ]);
     }
 }
