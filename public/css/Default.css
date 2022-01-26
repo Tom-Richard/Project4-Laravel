@@ -66,6 +66,24 @@ select {
   color: white;
   border-radius: 5px;
 }
+
+select::-webkit-scrollbar {
+    width: 10px;
+}
+
+select::-webkit-scrollbar-track {
+    background: gray;
+}
+
+select::-webkit-scrollbar-thumb {
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+select::-webkit-scrollbar-thumb:hover {
+    background: #e2e8f0;
+}
+
 .FBlist {
   display: flex;
   border-bottom: 1px solid rgba(255,255,255,.25);
@@ -117,15 +135,14 @@ select {
       justify-self: center;
   color: white;
   text-transform: uppercase;
-  font-size: 9vw;
+  font-size: clamp(2rem, 6vw, 6rem);
   margin-top: -5rem;
-
 }
 
 .header1 {
   width: 100%;
-  height: 40vh;
-  max-height: 300px;
+  min-height: 55vh;
+  max-height: 700px;
   position: relative;
   display: -ms-grid;
   display: grid;
@@ -407,7 +424,7 @@ a {
 }
 
 main {
-    min-height: 10vw;
+    min-height: 90vh;
 }
 
 .order-items-container {
@@ -484,6 +501,48 @@ main {
     right: 10px;
     width: 10vw;
     max-width: 60px;
+}
+
+.order-form-container {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 900px;
+}
+
+.order-form-item {
+    display: flex;
+    flex-direction: column;
+    width: 445px;
+    margin-bottom: 10px;
+}
+
+label {
+    font-size: 1.4rem;
+    color: white;
+}
+
+input[type="text"], input[type="email"], input[type="tel"]
+{
+    color: #000000;
+    font-size: 1.2rem;
+    padding: 2px;
+    font-weight: bolder;
+}
+
+#order-button {
+    font-size: 1.4rem;
+    display: block;
+    width: 200px;
+    color: #FFFFFF;
+    background-color: #808080;
+    border: none;
+    border-radius: 2px;
+    padding: 1rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 footer > * {
@@ -583,9 +642,6 @@ li {
     height: 30vw;
   }
 
-  .header__title {
-    font-size: 6vw;
-  }
   p {
     font-size: 5vw;
   }
@@ -613,4 +669,18 @@ li {
   h3 {
     margin-top: 20px;
   }
+}
+
+@media only screen and (max-width: 900px) {
+    .order-form-container {
+        width: 90%;
+    }
+
+    .order-form-item {
+        width: 100%;
+    }
+
+    #order-button {
+        width: 90%;
+    }
 }

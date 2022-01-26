@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Cart\CartOrderitemController;
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\User;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Cassandra\Custom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Arr;
 
 class OrderController extends Controller
 {
@@ -17,6 +22,29 @@ class OrderController extends Controller
      */
     public function create()
     {
+        $customer = Customer::findOrFail(auth()->user()->id);
+        $user = auth()->user();
+
+        $startday = Carbon::now()->toDateString();
+        $endday = Carbon::now()->addWeek(2)->toDateString();
+        $perioddays = CarbonPeriod::create($startday, '1 day', $endday);
+        $deliverydays = [];
+
+        $starttime = Carbon::now()->setTime(12 ,0,0,0);
+        $endtime = Carbon::now()->setTime(23 ,59,59,59);
+        $periodtime = CarbonPeriod::create($starttime, '15 minutes', $endtime);
+        $deliverytimes = [];
+
+        foreach ($periodtime as $dt)
+        {
+            array_push($deliverytimes, $dt);
+        }
+
+        foreach ($perioddays as $dt)
+        {
+            array_push($deliverydays, $dt);
+        }
+
         $pricetotal = 0.00;
         $orderitems = Session::get('cart.orderitems');
         if($orderitems != null) {
@@ -24,7 +52,7 @@ class OrderController extends Controller
                 $pricetotal += $orderitem->price();
             }
         }
-        return view('order.create', compact('orderitems', 'pricetotal'));
+        return view('order.create', compact('orderitems', 'pricetotal', 'deliverytimes', 'deliverydays', 'customer', 'user'));
     }
 
     /**
@@ -37,11 +65,27 @@ class OrderController extends Controller
     {
        $orderitems = Session::get('cart.orderitems');
        if($orderitems != null) {
+           $day = $request->input('day');
+           $time = $request->input('time');
+           $datetime = Carbon::parse($day . $time);
+
            $customer = Customer::findOrFail(auth()->user()->id);
+           $customer->first_name = $request->input('firstname');
+           $customer->last_name = $request->input('lastname');
+           $customer->address = $request->input('address');
+           $customer->phone = $request->input('phone');
+           $customer->zipcode = $request->input('zipcode');
+           $customer->increment('pizza_points', 10);
+           $customer->save();
+
+           $user = User::findOrFail(auth()->user()->id);
+           $user->email = $request->input('email');
+           $user->save();
+
            $order = new Order();
+           $order->deliverytime = $datetime;
            $order->customer_id = $customer->id;
            $order->save();
-           $customer->increment('pizza_points', 10);
 
            foreach ($orderitems as $orderitem_id => $orderitem) {
                  $orderitem->order()->associate($order->id);
@@ -53,7 +97,7 @@ class OrderController extends Controller
        }
        else
        {
-           return redirect()->route('pizza.index');
+           return abort(403);
        }
     }
 

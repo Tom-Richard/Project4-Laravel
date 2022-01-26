@@ -1,21 +1,9 @@
-<!-- Alle buttons werken alleen met HTML en nog niet met Laravel -->
-<!-- De informatie is gewoon opvulling omdat we nog niks van de docenten gehoord hebben over het bedrijf -->
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>StonksPizza</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="CSS/Default.css">
-    <link rel="stylesheet" href="{{ URL::asset('css/CSS/Default.css'); }}">
-
-</head>
-<body>
+@extends('layouts.default')
+@section('content')
 <a id="backtop" href="#top" onclick="hide()">^</a>
 <header id="top" class="header1">
     <div class="header__bg1"></div>
-    <h1 class="header__title1" onclick="location.reload()" onmouseover="this.style.cursor='pointer'">Ons heerlijke menu</h1>
+    <h1 class="header__title" onclick="location.reload()" onmouseover="this.style.cursor='pointer'">Bestelling plaatsen</h1>
     @if (Route::has('login'))
         @auth
             <div class="header__log">
@@ -34,61 +22,57 @@
         @endauth
     @endif
 </header>
-<main style="margin-top: 10vw;">
+<main style="margin-top: 2vw;">
 @if($orderitems != null)
-    @foreach($orderitems as $orderitem_id => $orderitem)
-        <p>Pizza {{ $orderitem->pizza->name }}</p>
-        @foreach($orderitem->ingredients as $ingredient)
-            <p>{{ $ingredient->name }}</p>
-        @endforeach
-        <p>€{{ number_format($orderitem->price(), 2, ",", ".") }}</p>
-    @endforeach
-    <p>Totaalprijs: €{{ number_format($pricetotal, 2, ",", ".")}}</p>
     <form method="POST" action="{{route('order.store')}}">
-        @csrf
-        <button type="submit">Bestellen</button>
+    @csrf
+        <div class="order-form-container">
+            <div class="order-form-item">
+                <label>Voornaam:</label>
+                <input name="firstname" type="text" value="{{ $customer->first_name }}"/>
+            </div>
+            <div class="order-form-item">
+                <label>Achternaam:</label>
+                <input name="lastname" type="text" value="{{ $customer->last_name }}"/>
+            </div>
+            <div class="order-form-item">
+                <label>Adres:</label>
+                <input name="address" type="text" value="{{ $customer->address }}"/>
+            </div>
+            <div class="order-form-item">
+                <label>Postcode:</label>
+                <input name="zipcode" type="text" value="{{ $customer->zipcode }}"/>
+            </div>
+            <div class="order-form-item">
+                <label>E-mail:</label>
+                <input name="email" type="email" value="{{ $user->email }}"/>
+            </div>
+            <div class="order-form-item">
+                <label>Telefoonnummer:</label>
+                <input name="phone" type="tel" value="{{ $customer->phone }}"/>
+            </div>
+            <div class="order-form-item">
+                <label>Bestelmoment:</label>
+                <div>
+                    <select name="day">
+                        @foreach($deliverydays as $day)
+                            <option value="{{$day->format('d-m-Y')}}">{{$day->format('d-m-Y')}}</option>
+                        @endforeach
+                    </select>
+                    <select name="time">
+                        @foreach($deliverytimes as $time)
+                            <option value="{{$time->format('H:i')}}">{{$time->format('H:i')}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+    <button type="submit" id="order-button">Bestellen</button>
     </form>
-@else
-    <p>Geen pizza's toegevoegd aan winkelwagentje.</p>
+    @else
+    <p class="order-item-warning">Geen pizza's toegevoegd aan winkelwagentje.</p>
 @endif
 </main>
-<footer>
-    <div class="fb2">
-        <div>
-            <h3>Services</h3>
-            <ul>
-                <li><a href="#">Bestellen</a></li>
-                <li><a href="#">Inloggen gebruiker</a></li>
-                <li><a href="#">Inloggen personeel</a></li>
-            </ul>
-        </div>
-        <div>
-            <h3>About</h3>
-            <ul>
-                <li><a href="#">Over ons</a></li>
-                <li><a href="#">Team</Table></a></li>
-                <li><a href="#">Contact</Table></a></li>
-            </ul>
-        </div>
-        <div>
-            <h3>StonksPizza</h3>
-            <p id="about">Cras quis ullamcorper ligula, ut scelerisque mauris. Praesent porta pharetra mi, nec consectetur nisi molestie vel. Praesent a lectus non nunc ullamcorper facilisis a vel nulla.</p>
-        </div>
-    </div>
-    <p id="copyright">©StonksPizza 2021</p>
-</footer>
-<script>
-    window.onscroll = function(ev) {
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-            document.getElementById("backtop").style.display = "block"
-        }
-        document.getElementById("backtop").addEventListener("click", click);
+@endsection
 
-        function click() {
-            document.getElementById("backtop").style.display = "none"
-        }
-    };
-</script>
-</body>
-</html>
 
