@@ -41,16 +41,12 @@
                                             @endforeach
                                         </select>
                                     </div>
-<<<<<<< HEAD
                                     <input type="image" src="{{ asset('images/4.png') }}" id="absolute2">
-
-=======
                                     @if ($errors->any())
                                         @foreach ($errors->all() as $error)
                                             <div class="error">{{$error}}</div>
                                         @endforeach
                                     @endif
->>>>>>> 535eb37fd3be800c72e0912a1c68f90886a0ecab
                                 </form>
                             </div>
                         </div>
@@ -59,9 +55,9 @@
                             @csrf
                             <input id="absolute" type="image" src="{{ asset('images/6.png')}}" }}></input>
                             <input type="hidden" name="pizzaID" value="{{$pizza->id}}"></input>
-                        </form> 
+                        </form>
                         </div>
-                       
+
                         <p id="voorraad">Op voorraad</p>
 
                     </div>
