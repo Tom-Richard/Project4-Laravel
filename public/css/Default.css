@@ -561,6 +561,11 @@ input[type="text"], input[type="email"], input[type="tel"]
     margin-right: auto;
 }
 
+.error {
+    color: red;
+    font-size: 1rem;
+}
+
 footer > * {
   color: white;
   font-size: 20px;
