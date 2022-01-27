@@ -16,32 +16,32 @@ class StatusSeeder extends Seeder
     {
         Status::insert([
             'id' => '1',
-            'name' => 'besteld',
+            'name' => 'Besteld',
         ]);
 
         Status::insert([
             'id' => '2',
-            'name' => 'bereiden',
+            'name' => 'Wordt bereid',
         ]);
 
         Status::insert([
             'id' => '3',
-            'name' => 'oven',
+            'name' => 'In de oven',
         ]);
 
         Status::insert([
             'id' => '4',
-            'name' => 'onderweg',
+            'name' => 'Onderweg',
         ]);
 
         Status::insert([
             'id' => '5',
-            'name' => 'bezorgd',
+            'name' => 'Bezorgd',
         ]);
 
         Status::insert([
             'id' => '6',
-            'name' => 'geannuleerd',
+            'name' => 'Geannuleerd',
         ]);
     }
 }
