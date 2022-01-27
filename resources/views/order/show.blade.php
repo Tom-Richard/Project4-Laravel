@@ -64,7 +64,7 @@
             @endforeach
             <div class="order-pricetotal">
                 <p>Totaalprijs: €{{ number_format($pricetotal, 2, ",", ".")}}</p>
-                @if($order->status->id != 6)
+                @if($order->status->id != 4 && $order->status->id != 5 && $order->status->id != 6)
                 <form method="POST" action="{{route('order.update', $order->id)}}">
                     @csrf
                     @method('PUT')

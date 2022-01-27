@@ -91,15 +91,13 @@ class OrderController extends Controller
            $order->save();
 
            foreach ($orderitems as $orderitem_id => $orderitem) {
-                 $orderitem->order()->associate($order->id);
-                 $orderitem->save();
+               $orderitem->order()->associate($order->id);
+               $orderitem->save();
            }
-
            Session::forget('cart.orderitems');
            return redirect()->route('order.show', $order->id);
        }
-       else
-       {
+       else {
            return abort(403);
        }
     }
@@ -138,16 +136,10 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         $order = Order::findOrFail($id);
-        if($order->customer_id == auth()->user()->id && $order->status->id == 1)
+        if($order->customer_id == auth()->user()->id && $order->status->id != 4 && $order->status->id != 5 && $order->status->id != 6)
         {
             $order->status()->associate(6);
             $order->save();
-
-            foreach ($order->orderitems as $orderitem)
-            {
-                $orderitem->status()->associate(6);
-                $orderitem->save();
-            }
 
             return redirect()->back();
         }
