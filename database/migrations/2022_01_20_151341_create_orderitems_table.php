@@ -18,6 +18,7 @@ class CreateOrderitemsTable extends Migration
             $table->foreignId('pizza_id')->nullable(false)->references('id')->on('pizzas')->cascadeOnDelete();
             $table->foreignId('size_id')->nullable(true)->references('id')->on('sizes')->cascadeOnDelete();
             $table->foreignId('order_id')->nullable(true)->references('id')->on('orders')->cascadeOnDelete();
+            $table->foreignId('status_id')->nullable(true)->references('id')->on('statuses')->cascadeOnDelete();
         });
     }
 

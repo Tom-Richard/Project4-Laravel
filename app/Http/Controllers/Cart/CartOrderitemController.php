@@ -26,6 +26,7 @@ class CartOrderitemController extends Controller
             $orderitem = new Orderitem;
             $orderitem->pizza()->associate($pizza);
             $orderitem->size()->associate($size);
+            $orderitem->status()->associate(1);
             $orderitem->save();
 
             foreach ($pizza->ingredients as $ingredient) {
