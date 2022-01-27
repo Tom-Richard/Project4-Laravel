@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePizzaRequest;
 use http\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,8 +40,10 @@ class PizzaController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function store(StorePizzaRequest $request)
     {
+        $validated = $request->validated();
+
         $selectedPizzaID = $request->input("pizzaID");
         $selectedPizza = Pizza::findOrFail($selectedPizzaID);
         $pizza = $selectedPizza->replicate()->fill([

@@ -40,7 +40,9 @@
                     @endforeach
                 </select>
                 <div><button type="submit" id="btn6">Voeg toe</button></div>
-
+                @error('ingredientID')
+                <div class="error">{{ $message }}</div>
+                @enderror
             </form>
             <div style="width: 200px"></div>
         </div>
@@ -58,7 +60,12 @@
                             @endforeach
                         </select>
                     </div>
-
+                    @error('pizza_id')
+                    <div class="error">{{ $message }}</div>
+                    @enderror
+                    @error('formaat_id')
+                    <div class="error">{{ $message }}</div>
+                    @enderror
                 </form>
             </div>
     </div>

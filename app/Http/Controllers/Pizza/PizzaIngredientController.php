@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Pizza;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePizzaIngredientRequest;
+use App\Http\Requests\StorePizzaRequest;
 use App\Models\Ingredient;
 use App\Models\Pizza;
 use Illuminate\Http\Request;
@@ -15,8 +17,10 @@ class PizzaIngredientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $pizza_id)
+    public function store(StorePizzaIngredientRequest $request, $pizza_id)
     {
+        $validated = $request->validated();
+
         $pizza = Pizza::findOrFail($pizza_id);
         $ingredientID = $request->input("ingredientID");
         $ingredient = Ingredient::findOrFail($ingredientID);

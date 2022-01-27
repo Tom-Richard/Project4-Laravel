@@ -29,27 +29,45 @@
         <div class="order-form-container">
             <div class="order-form-item">
                 <label>Voornaam:</label>
-                <input name="firstname" type="text" value="{{ $customer->first_name }}"/>
+                <input name="firstname" type="text" value="{{ old('firstname', $customer->first_name) }}"/>
+                @error('firstname')
+                <div class="error">{{ $message }}</div>
+                @enderror
             </div>
             <div class="order-form-item">
                 <label>Achternaam:</label>
-                <input name="lastname" type="text" value="{{ $customer->last_name }}"/>
+                <input name="lastname" type="text" value="{{ old('lastname', $customer->last_name) }}"/>
+                @error('lastname')
+                <div class="error">{{ $message }}</div>
+                @enderror
             </div>
             <div class="order-form-item">
                 <label>Adres:</label>
-                <input name="address" type="text" value="{{ $customer->address }}"/>
+                <input name="address" type="text" value="{{ old('address', $customer->address) }}"/>
+                @error('address')
+                <div class="error">{{ $message }}</div>
+                @enderror
             </div>
             <div class="order-form-item">
                 <label>Postcode:</label>
-                <input name="zipcode" type="text" value="{{ $customer->zipcode }}"/>
+                <input name="zipcode" type="text" value="{{ old('zipcode', $customer->zipcode) }}"/>
+                @error('zipcode')
+                <div class="error">{{ $message }}</div>
+                @enderror
             </div>
             <div class="order-form-item">
                 <label>E-mail:</label>
-                <input name="email" type="email" value="{{ $user->email }}"/>
+                <input name="email" type="email" value="{{ old('email', $user->email) }}"/>
+                @error('email')
+                <div class="error">{{ $message }}</div>
+                @enderror
             </div>
             <div class="order-form-item">
                 <label>Telefoonnummer:</label>
-                <input name="phone" type="tel" value="{{ $customer->phone }}"/>
+                <input name="phone" type="tel" value="{{ old('phone', $customer->phone) }}"/>
+                @error('phone')
+                <div class="error">{{ $message }}</div>
+                @enderror
             </div>
             <div class="order-form-item">
                 <label>Bestelmoment:</label>
@@ -65,6 +83,12 @@
                         @endforeach
                     </select>
                 </div>
+                @error('day')
+                <div class="error">{{ $message }}</div>
+                @enderror
+                @error('time')
+                <div class="error">{{ $message }}</div>
+                @enderror
             </div>
         </div>
     <button type="submit" id="order-button">Bestellen</button>

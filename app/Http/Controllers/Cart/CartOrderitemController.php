@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cart;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCartOrderitemRequest;
 use App\Models\Orderitem;
 use App\Models\Pizza;
 use App\Models\Size;
@@ -17,8 +18,10 @@ class CartOrderitemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCartOrderitemRequest $request)
     {
+        $validated = $request->validated();
+
         $pizza = Pizza::findOrFail($request->input('pizza_id'));
         $size = Size::findOrFail($request->input('formaat_id'));
         if($pizza->user_id == auth()->user()->id || $pizza->is_custom == false)

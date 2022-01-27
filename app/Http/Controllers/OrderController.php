@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Cart\CartOrderitemController;
+use App\Http\Requests\StoreOrderRequest;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\User;
@@ -61,8 +62,10 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreOrderRequest $request)
     {
+        $validated = $request->validated();
+
        $orderitems = Session::get('cart.orderitems');
        if($orderitems != null) {
            $day = $request->input('day');
@@ -135,10 +138,17 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         $order = Order::findOrFail($id);
-        if($order->customer_id == auth()->user()->id)
+        if($order->customer_id == auth()->user()->id && $order->status->id == 1)
         {
             $order->status()->associate(6);
             $order->save();
+
+            foreach ($order->orderitems as $orderitem)
+            {
+                $orderitem->status()->associate(6);
+                $orderitem->save();
+            }
+
             return redirect()->back();
         }
         else

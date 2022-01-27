@@ -42,6 +42,11 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    @if ($errors->any())
+                                        @foreach ($errors->all() as $error)
+                                            <div class="error">{{$error}}</div>
+                                        @endforeach
+                                    @endif
                                 </form>
                             </div>
                         </div>
