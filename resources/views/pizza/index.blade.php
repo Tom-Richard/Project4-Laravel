@@ -27,13 +27,12 @@
     @foreach ($pizzas as $pizza)
                     <div class="FBlist">
                         <img src="{{ asset('images/3.png') }}" class="ImagesInList" style="max-width: 300px;">
-                        <div style="margin-left: 20px">
+                        <div style="margin-left: 20px; width: 1000px">
                             <div><strong>Naam:</strong> {{ $pizza->name }}</div>
                             <div id="price"><strong>Prijs:</strong> €{{ number_format($pizza->price(), 2, ",", ".")}}</div>
                             <div>
                                 <form method="post" action="{{route('cartorderitem.store')}}">
                                     @csrf
-                                    <input type="image" src="{{ asset('images/4.png') }}" style="width: 100px;">
                                     <input type="hidden" name="pizza_id" value="{{ $pizza->id }}">
                                     <div><strong>Formaat:</strong>
                                         <select name="formaat_id" id="ddlViewBy">
@@ -42,15 +41,21 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    <input type="image" src="{{ asset('images/4.png') }}" id="absolute2">
+
                                 </form>
                             </div>
                         </div>
-                        <p style="position: absolute; width: 300px; right: 0; font-size: medium; color: aquamarine;">Dit product is op voorraad</p>
+                        <div style="width: 100%;">
                         <form method="post" action="{{ route('pizza.store') }}">
                             @csrf
-                            <input style="height: 50px; width: 50px" type="image" src="{{ asset('images/6.png')}}" }}></input>
+                            <input id="absolute" type="image" src="{{ asset('images/6.png')}}" }}></input>
                             <input type="hidden" name="pizzaID" value="{{$pizza->id}}"></input>
-                        </form>
+                        </form> 
+                        </div>
+                       
+                        <p id="voorraad">Op voorraad</p>
+
                     </div>
      @endforeach
  </div>

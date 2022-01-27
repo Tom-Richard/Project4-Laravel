@@ -17,9 +17,26 @@ body {
 br {
   margin-bottom: 2%;
 }
+#ddlViewBy {
+  height: 3vw;
+}
+#absolute2 {
+  width: 10vw;
+}
+#absolute {
+  width: 5vw;
+  float: right;
+}
+#voorraad {
+  text-align: right;
+  font-size: 1vw;
+  position: absolute;
+  color: #78b13f;
+}
 .ImagesInList {
   border-right: 1px solid rgba(255,255,255,.25);
   padding-right: 20px;
+  width: 25vw;
 }
 #btn5 {
   height: 100%;
@@ -141,8 +158,7 @@ select::-webkit-scrollbar-thumb:hover {
 
 .header1 {
   width: 100%;
-  min-height: 55vh;
-  max-height: 700px;
+  height: 30vw;
   position: relative;
   display: -ms-grid;
   display: grid;
@@ -180,7 +196,7 @@ select::-webkit-scrollbar-thumb:hover {
       justify-self: center;
   color: rgb(250, 212, 231);
   text-transform: uppercase;
-  font-size: 7rem;
+  font-size: 7vw;
   margin-top: -5rem;
 
 }
