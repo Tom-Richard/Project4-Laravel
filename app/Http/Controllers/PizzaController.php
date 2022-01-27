@@ -27,7 +27,7 @@ class PizzaController extends Controller
     public function edit($pizzaID)
     {
         $pizza = Pizza::findOrFail($pizzaID);
-        $ingredienten = Ingredient::all();
+        $ingredienten = Ingredient::all()->except(1);
         $sizes = Size::all();
 
         if($pizza->user_id == auth()->user()->id)

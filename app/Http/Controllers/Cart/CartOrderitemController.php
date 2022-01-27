@@ -24,7 +24,11 @@ class CartOrderitemController extends Controller
 
         $pizza = Pizza::findOrFail($request->input('pizza_id'));
         $size = Size::findOrFail($request->input('formaat_id'));
-        if($pizza->user_id == auth()->user()->id || $pizza->is_custom == false)
+        
+        if (count($pizza->ingredients) <= 1) {
+            return redirect()->route('pizza.edit', $pizza)->with(['info' => 'Voeg minimaal 1 ander ingrediënt toe dan bodemdeeg!']);
+        }
+        else if($pizza->user_id == auth()->user()->id || $pizza->is_custom == false)
         {
             $orderitem = new Orderitem;
             $orderitem->pizza()->associate($pizza);

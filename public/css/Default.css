@@ -13,6 +13,12 @@
 body {
   background-color: rgb(34, 34, 34);
 }
+#redtext {
+  text-align: center;
+  color: red;
+  font-weight: bold;
+  font-size: 20px;
+}
 
 br {
   margin-bottom: 2%;
@@ -28,6 +34,9 @@ br {
   width: 5vw;
   float: right;
   max-width: 50px;
+}
+#widthdiv {
+  width: 200px;
 }
 #voorraad {
   text-align: right;
