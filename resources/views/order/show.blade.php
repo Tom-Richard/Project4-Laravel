@@ -57,8 +57,29 @@
                             <p>{{ $ingredient->name }}</p>
                         @endforeach
                     </div>
-                    <div class="order-item-price">
+                    <div class="order-item-pricestatus">
                         <p>€{{ number_format($orderitem->price(), 2, ",", ".") }}</p>
+                        <div class="order-status">
+                            @if($order->status->id == 1)
+                                <img src="{{asset('images/4.png')}}"/>
+                                <p>Besteld</p>
+                            @elseif($order->status->id == 2)
+                                <img src="{{asset('images/8.png')}}"/>
+                                <p>Wordt bereid</p>
+                            @elseif($order->status->id == 3)
+                                <img src="{{asset('images/7.png')}}"/>
+                                <p>In oven</p>
+                            @elseif($order->status->id == 4)
+                                <img src="{{asset('images/1.png')}}"/>
+                                <p>Onderweg</p>
+                            @elseif($order->status->id == 5)
+                                <img src="{{asset('images/9.png')}}"/>
+                                <p>Bezorgd</p>
+                            @elseif($order->status->id == 6)
+                                <img src="{{asset('images/11.png')}}"/>
+                                <p>Geannuleerd</p>
+                            @endif
+                        </div>
                     </div>
                 </div>
             @endforeach
