@@ -26,7 +26,7 @@
     <div class="Container1" style="margin-top: 2vw;">
     @foreach ($pizzas as $pizza)
                     <div class="FBlist">
-                        <img src="{{ asset('images/3.png') }}" class="ImagesInList" style="max-width: 300px;">
+                        <img src="{{ asset('images/3.png') }}" class="ImagesInList">
                         <div style="margin-left: 20px; width: 1000px">
                             <div><strong>Naam:</strong> {{ $pizza->name }}</div>
                             <div id="price"><strong>Prijs:</strong> €{{ number_format($pizza->price(), 2, ",", ".")}}</div>

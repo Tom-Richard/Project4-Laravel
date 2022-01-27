@@ -22,10 +22,12 @@ br {
 }
 #absolute2 {
   width: 10vw;
+  max-width: 100px;
 }
 #absolute {
   width: 5vw;
   float: right;
+  max-width: 50px;
 }
 #voorraad {
   text-align: right;
@@ -37,12 +39,18 @@ br {
   border-right: 1px solid rgba(255,255,255,.25);
   padding-right: 20px;
   width: 25vw;
+  display: inline-block;
+  max-height: 200px;
+  max-width: 200px;
+  margin-top: 1vw;
+  vertical-align: middle;
 }
 #btn5 {
   height: 100%;
   width: 200px;
   background-color: rgb(167, 76, 76);
   border: none;
+  margin: auto;
   border-radius: 2px;
 }
 #btn6 {
@@ -208,8 +216,6 @@ select::-webkit-scrollbar-thumb:hover {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -ms-grid-row: 1;
-  -ms-grid-column: 2;
   -ms-grid-column-span: 1;
   grid-area: 1 / 2 / 1 / 3;
   padding: 1rem 2rem;
@@ -704,4 +710,16 @@ li {
     #order-button {
         width: 90%;
     }
+}
+
+
+@media only screen and (min-width: 1200px) {
+  div {
+    font-size: 35px;
+  }
+  .Container1 {
+    margin-left: 10vw;
+    margin-right: 10vw;
+  }
+  
 }
