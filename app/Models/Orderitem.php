@@ -30,11 +30,6 @@ class Orderitem extends Model
         return $this->belongsToMany(Ingredient::class)->withPivot('quantity');;
     }
 
-    public function status()
-    {
-        return $this->belongsTo(Status::class);
-    }
-
     public function price()
     {
         $price = 0;

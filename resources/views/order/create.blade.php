@@ -70,7 +70,7 @@
                 @enderror
             </div>
             <div class="order-form-item">
-                <label>Bestelmoment:</label>
+                <label>Bezorgmoment:</label>
                 <div>
                     <select name="day">
                         @foreach($deliverydays as $day)
