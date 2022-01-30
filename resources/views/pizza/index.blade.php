@@ -31,7 +31,12 @@
                             <div><strong>Naam:</strong> {{ $pizza->name }}</div>
                             <div id="price"><strong>Prijs:</strong> €{{ number_format($pizza->price(), 2, ",", ".")}}</div>
                             <div>
-                                <form method="post" action="{{route('cartorderitem.store')}}">
+                            @foreach($pizza->ingredients as $ingredient => $object)
+                            @if($object['quantity'] == 0) 
+                        
+                            @break
+                        @elseif($ingredient === array_key_last($pizza->ingredients->toArray()))
+                        <form method="post" action="{{route('cartorderitem.store')}}">
                                     @csrf
                                     <input type="hidden" name="pizza_id" value="{{ $pizza->id }}">
                                     <div><strong>Formaat:</strong>
@@ -42,12 +47,16 @@
                                         </select>
                                     </div>
                                     <input type="image" src="{{ asset('images/4.png') }}" id="absolute2">
+                                    
                                     @if ($errors->any())
                                         @foreach ($errors->all() as $error)
                                             <div class="error">{{$error}}</div>
                                         @endforeach
                                     @endif
                                 </form>
+                        @endif
+                        @endforeach
+                                
                             </div>
                         </div>
                         <div style="width: 100%;">
@@ -57,8 +66,16 @@
                             <input type="hidden" name="pizzaID" value="{{$pizza->id}}"></input>
                         </form>
                         </div>
-
-                        <p id="voorraad">Op voorraad</p>
+                        @foreach($pizza->ingredients as $ingredient => $object)
+                        @if($object['quantity'] == 0) 
+                        <p id="voorraad">Niet op voorraad</p>
+                        @break
+                        @elseif($ingredient === array_key_last($pizza->ingredients->toArray()))
+                        <p id="voorraad1">Op voorraad</p>
+                        @endif
+                        @endforeach
+                        
+                        </script>
 
                     </div>
      @endforeach

@@ -59,4 +59,8 @@ class RoleController extends Controller
         $role->delete();
         return redirect()->route('role.index');
     }
+    public function show()
+    {
+        return abort(403);
+    }
 }

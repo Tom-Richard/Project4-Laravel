@@ -41,8 +41,16 @@ br {
 #voorraad {
   text-align: right;
   font-size: 1vw;
+  font-weight: bold;
   position: absolute;
-  color: #78b13f;
+  color: rgb(161, 67, 67);
+}
+#voorraad1 {
+  text-align: right;
+  font-size: 1vw;
+  font-weight: bold;
+  position: absolute;
+  color: rgb(38, 134, 23);
 }
 .ImagesInList {
   border-right: 1px solid rgba(255,255,255,.25);

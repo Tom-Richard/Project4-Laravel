@@ -25,6 +25,13 @@ class CartOrderitemController extends Controller
         $pizza = Pizza::findOrFail($request->input('pizza_id'));
         $size = Size::findOrFail($request->input('formaat_id'));
         
+        foreach($pizza->ingredients as $ingredient) 
+        {
+            if($ingredient['quantity'] == 0) 
+            {
+                return redirect()->route('pizza.edit', $pizza)->with(['info' => "Het ingrediënt " . $ingredient['name'] . " is helaas niet meer op voorraad, verwijder deze om verder te gaan."]);
+            }
+        }
         if (count($pizza->ingredients) <= 1) {
             return redirect()->route('pizza.edit', $pizza)->with(['info' => 'Voeg minimaal 1 ander ingrediënt toe dan bodemdeeg!']);
         }

@@ -20,14 +20,17 @@ class PizzaController extends Controller
     {
         $pizzas = Pizza::where('is_custom', false)->get();
         $sizes = Size::all();
-
         return view('pizza.index',compact('pizzas', 'sizes'));
     }
 
     public function edit($pizzaID)
     {
         $pizza = Pizza::findOrFail($pizzaID);
-        $ingredienten = Ingredient::all()->except(1);
+        $ingredienten = Ingredient::with('pizzas')->whereDoesntHave('pizzas', function($query) use ($pizzaID) {
+            $query->where('pizzas.id', $pizzaID);
+        })->get();
+        
+    
         $sizes = Size::all();
 
         if($pizza->user_id == auth()->user()->id)
@@ -60,5 +63,13 @@ class PizzaController extends Controller
         }
 
         return redirect()->route('pizza.edit', $pizza->id);
+    }
+    public function show()
+    {
+        return abort(403);
+    }
+    public function create()
+    {
+        return abort(403);
     }
 }
