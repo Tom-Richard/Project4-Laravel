@@ -24,10 +24,10 @@ class CartOrderitemController extends Controller
 
         $pizza = Pizza::findOrFail($request->input('pizza_id'));
         $size = Size::findOrFail($request->input('formaat_id'));
-        
-        foreach($pizza->ingredients as $ingredient) 
+
+        foreach($pizza->ingredients as $ingredient)
         {
-            if($ingredient['quantity'] == 0) 
+            if($ingredient['quantity'] == 0)
             {
                 return redirect()->route('pizza.edit', $pizza)->with(['info' => "Het ingrediënt " . $ingredient['name'] . " is helaas niet meer op voorraad, verwijder deze om verder te gaan."]);
             }
@@ -35,13 +35,16 @@ class CartOrderitemController extends Controller
         if (count($pizza->ingredients) <= 1) {
             return redirect()->route('pizza.edit', $pizza)->with(['info' => 'Voeg minimaal 1 ander ingrediënt toe dan bodemdeeg!']);
         }
+        //Als pizza van huidige user is of niet custom is
         else if($pizza->user_id == auth()->user()->id || $pizza->is_custom == false)
         {
+            //Maak nieuwe orderitem
             $orderitem = new Orderitem;
             $orderitem->pizza()->associate($pizza);
             $orderitem->size()->associate($size);
             $orderitem->save();
 
+            //Voeg alle ingrediënten toe aan orderitem
             foreach ($pizza->ingredients as $ingredient) {
                 $selectedPizzaQuantity = $ingredient->pivot->quantity;
                 $orderitem->ingredients()->attach($ingredient, ['quantity' => $selectedPizzaQuantity]);

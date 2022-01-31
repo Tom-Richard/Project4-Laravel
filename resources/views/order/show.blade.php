@@ -47,8 +47,8 @@
         @endif
     </div>
     <div class="order-items-container" >
-        @if($orderitems != null)
-            @foreach($orderitems as $orderitem_id => $orderitem)
+        @if($order->orderitems != null)
+            @foreach($order->orderitems as $orderitem_id => $orderitem)
                 <div class="order-item">
                     <img src="{{ asset('images/3.png') }}">
                     <div class="order-item-description">
@@ -63,7 +63,7 @@
                 </div>
             @endforeach
             <div class="order-pricetotal">
-                <p>Totaalprijs: €{{ number_format($pricetotal, 2, ",", ".")}}</p>
+                <p>Totaalprijs: €{{ number_format($order->price(), 2, ",", ".")}}</p>
                 @if($order->status->id != 4 && $order->status->id != 5 && $order->status->id != 6)
                 <form method="POST" action="{{route('order.update', $order->id)}}">
                     @csrf

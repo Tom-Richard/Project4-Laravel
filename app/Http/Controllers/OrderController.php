@@ -67,6 +67,7 @@ class OrderController extends Controller
         $validated = $request->validated();
 
        $orderitems = Session::get('cart.orderitems');
+       //Als er orderitems aan winkelmandje zijn toegevoegd
        if($orderitems != null) {
            $day = $request->input('day');
            $time = $request->input('time');
@@ -113,13 +114,7 @@ class OrderController extends Controller
         $order = Order::findOrFail($id);
         if($order->customer_id == auth()->user()->id)
         {
-            $pricetotal = 0.00;
-            $orderitems = $order->orderitems;
-            foreach($orderitems as $orderitem)
-            {
-                $pricetotal += $orderitem->price();
-            }
-            return view('order.show', compact('orderitems', 'pricetotal', 'order'));
+            return view('order.show', compact('order'));
         }
         else {
             abort(403);
@@ -136,8 +131,10 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         $order = Order::findOrFail($id);
+        //Als order bij huidige user hoort en order niet onderweg, afgeleverd of al geannuleerd is
         if($order->customer_id == auth()->user()->id && $order->status->id != 4 && $order->status->id != 5 && $order->status->id != 6)
         {
+            //Update status naar geannuleerd
             $order->status()->associate(6);
             $order->save();
 

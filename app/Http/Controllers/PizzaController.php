@@ -26,12 +26,11 @@ class PizzaController extends Controller
     public function edit($pizzaID)
     {
         $pizza = Pizza::findOrFail($pizzaID);
+        $sizes = Size::all();
+
         $ingredienten = Ingredient::with('pizzas')->whereDoesntHave('pizzas', function($query) use ($pizzaID) {
             $query->where('pizzas.id', $pizzaID);
         })->get();
-        
-    
-        $sizes = Size::all();
 
         if($pizza->user_id == auth()->user()->id)
         {

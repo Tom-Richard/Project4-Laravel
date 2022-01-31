@@ -25,6 +25,19 @@ class Order extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+
+    public function price()
+    {
+        $price = 0.00;
+        //Bereken totaalprijs van alle winkelwagenitems
+        if($this->orderitems != null) {
+            foreach ($this->orderitems as $orderitem) {
+                $price += $orderitem->price();
+            }
+        }
+
+        return $price;
+    }
 }
 
 

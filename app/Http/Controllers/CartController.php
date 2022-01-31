@@ -17,6 +17,7 @@ class CartController extends Controller
     {
         $pricetotal = 0.00;
         $orderitems = Session::get('cart.orderitems');
+        //Bereken totaalprijs van alle winkelwagenitems
         if($orderitems != null) {
             foreach ($orderitems as $orderitem) {
                 $pricetotal += $orderitem->price();
