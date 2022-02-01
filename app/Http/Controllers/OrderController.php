@@ -131,12 +131,18 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         $order = Order::findOrFail($id);
+        $customer = Customer::findOrFail(auth()->user()->id);
+
         //Als order bij huidige user hoort en order niet onderweg, afgeleverd of al geannuleerd is
-        if($order->customer_id == auth()->user()->id && $order->status->id != 4 && $order->status->id != 5 && $order->status->id != 6)
+        if($order->customer_id == $customer->id && $order->status->id != 4 && $order->status->id != 5 && $order->status->id != 6)
         {
             //Update status naar geannuleerd
             $order->status()->associate(6);
             $order->save();
+
+            //Verlaag pizzapunten
+            $customer->decrement('pizza_points', 10);
+            $customer->save();
 
             return redirect()->back();
         }
