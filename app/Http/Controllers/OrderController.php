@@ -141,8 +141,10 @@ class OrderController extends Controller
             $order->save();
 
             //Verlaag pizzapunten
-            $customer->decrement('pizza_points', 10);
-            $customer->save();
+            if($customer->pizza_points != 0) {
+                $customer->decrement('pizza_points', 10);
+                $customer->save();
+            }
 
             return redirect()->back();
         }
