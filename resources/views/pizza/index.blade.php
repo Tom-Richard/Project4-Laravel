@@ -26,7 +26,7 @@
     <div class="Container1" style="margin-top: 2vw;">
     @foreach ($pizzas as $pizza)
                     <div class="FBlist">
-                    @if (file_exists(public_path('\imagespizza' . $pizza->id . '.png')))
+                    @if (file_exists(public_path('\images\pizza' . $pizza->id . '.png')))
                         <img src="\imagespizza{{$pizza->id}}.png" id="pizzaimg" class="ImagesInList">
                     @else
                         <img src="{{ asset('images/11.png') }}" id="pizzaimg" class="ImagesInList">
