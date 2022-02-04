@@ -31,4 +31,9 @@ class Pizza extends Model
         }
         return $price;
     }
+
+    public function pizza()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

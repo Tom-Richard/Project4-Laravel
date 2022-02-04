@@ -14,6 +14,7 @@ class OrderitemTest extends TestCase
     {
         //Arrange
         $this->seed();
+
         $orderitem = new Orderitem();
         $orderitem->pizza()->associate(1);
         $orderitem->size()->associate(2);
