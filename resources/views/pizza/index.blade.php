@@ -29,7 +29,7 @@
                     @if (file_exists(public_path('\images\pizza' . $pizza->id . '.png')))
                         <img src="\imagespizza{{$pizza->id}}.png" id="pizzaimg" class="ImagesInList">
                     @else
-                        <img src="{{ asset('images/11.png') }}" id="pizzaimg" class="ImagesInList">
+                        <img src="{{ asset('images/3.png') }}" id="pizzaimg" class="ImagesInList">
                     @endif
                         <div style="margin-left: 20px; width: 1000px">
                             <div><strong>Naam:</strong> {{ $pizza->name }}</div>
