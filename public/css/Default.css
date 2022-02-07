@@ -19,6 +19,12 @@ body {
   font-weight: bold;
   font-size: 20px;
 }
+#pizzaimg
+{
+  width: 13vw;
+  height: 13vw;
+  padding: 10px;
+}
 
 br {
   margin-bottom: 2%;
