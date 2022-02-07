@@ -63,12 +63,14 @@ class PizzaController extends Controller
 
         return redirect()->route('pizza.edit', $pizza->id);
     }
+
     public function show()
     {
-        return abort(403);
+        return abort(404);
     }
+
     public function create()
     {
-        return abort(403);
+        return abort(404);
     }
 }
